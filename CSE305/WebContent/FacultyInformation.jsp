@@ -13,7 +13,7 @@ response.setDateHeader("Expires",0);
 </head>
 <body style="text-align: center" bgcolor="#ffff00">
     <span style="font-size: 14pt; font-family: Arial"><strong>Hello, Professor. Your ID is
-        <%=session.getValue("login")%>. Here is Your Course Information.<br />
+        <%=session.getAttribute("login")%>. Here is Your Course Information.<br />
         <br />
         <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 100%">
             <tr>
