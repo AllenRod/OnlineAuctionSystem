@@ -36,13 +36,14 @@
             
             			conn.setAutoCommit(false);
             			java.sql.Statement stmt1=conn.createStatement();
-		java.sql.ResultSet rs = stmt1.executeQuery(" select * from User where userID='"+username+"' and password='"+userpasswd+"'");
+		java.sql.ResultSet rs = stmt1.executeQuery(" select * from User, Person where userID='"+username+"' and password='"+userpasswd+"' and Person.ID = user.PersonID");
 		if (rs.next())
 		{
 			// login success
 			session.setAttribute("login",username);
 			//response.sendRedirect("StudentInformation.jsp");
-			System.out.println("Login");
+			System.out.println("Login" + rs.getNString("LastName") + ", " + rs.getNString("FirstName"));
+			
 		}
 		//else
 		//{
