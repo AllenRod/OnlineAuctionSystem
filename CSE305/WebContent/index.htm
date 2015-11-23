@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title>Student Registration System -- Main</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet"/>
 <script language="javascript" type="text/javascript">
 // <!CDATA[
 
@@ -19,31 +20,25 @@ function Button2_onclick() {
 // ]]>
 </script>
 </head>
-<body style="font-size: 12pt; text-align: center" bgcolor="#ffff00">
-    <span style="font-family: Arial"><strong><span style="font-size: 14pt">Student Registration
-        System</span><br />
+<body style="font-size: 12pt; text-align: center;background-color:#990000" class="container">
+    <span style="font-family: Arial"><strong><span style="font-size: 14pt;color:white">Online Auction System</span></strong><br />
         <br />
         <img src="MainPage.JPG" /><br />
-        <br />
+        <br /></span>
         
-        <form name="myForm" action="login.jsp" method="post">
-
-        <span style="font-size: 10pt">User ID :</span>
-        <input id="Text1" name="username" type="text" />
-        &nbsp; <span style="font-size: 10pt">Password:</span>
-        <input id="Password1" name="userpasswd" type="password" />
+        <form name="myForm" action="login.jsp" method="post" class="form-signin">
+        <label class="sr-only">User ID :</label>
+        <input id="Text1" name="username" type="text" class="form-control"
+		placeholder="Enter Your User ID" required/>
+        &nbsp; <label class="sr-only">Password:</label>
+        <input id="Password1" name="userpasswd" type="password" class="form-control"
+		placeHolder="Entery Your Password" required/>
         &nbsp;
-        <input id="Button1" style="width: 70px" type="button" value="Log In" onclick="return Button1_onclick()" />
+        <input id="Button1" class="btn btn-lg btn-primary btn-block" type="button" value="Log In" onclick="return Button1_onclick()" />
         &nbsp;
-        <input id="Button2" style="width: 70px" type="button" value="Register" onclick="return Button2_onclick()" /><br />
+        <input id="Button2" class="btn btn-lg btn-default btn-block" type="button" value="Register" onclick="return Button2_onclick()" /><br />
         <br />
         </form>
         
-        <span style="font-size: 9pt">
-            <br />
-            Shang Yang, 10/19/2006, Demo Version<br />
-            Department of Computer Science, State University of New York at Stony Brook</span></strong></span><span
-                style="font-size: 9pt"> </span>
-
 </body>
 </html>
