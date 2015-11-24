@@ -1,46 +1,235 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Select Student or Professor -- Student Registration System</title>
-<script language="javascript" type="text/javascript">
-// <!CDATA[
-
-function Button1_onclick() {
-if(document.form1.Radio1.checked)
-   window.open("StudentRegistration.htm","_self");
-else
-   window.open("ProfessorRegistration.htm","_self");
-
-}
-
-// ]]>
+<title>Select Student or Professor -- Student Registration
+	System</title>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<script src="js/jquery.js"></script>
+<script>
+	$(function() {
+		$('.roleSelect').change(function () {
+			var curval = $('.roleSelect').find(':selected').val();
+			console.log(curval);
+			$('.formDiv').hide();
+			switch (curval){
+			case ('cust'):$('#custForm').show();break;
+			case ('emp'):$('#empForm').show();break;
+			case ('man'):$('#manForm').show();break;
+			}		
+		});
+	});
 </script>
 </head>
-<body style="text-align: center" bgcolor="#ffff00">
-    <span><strong><span style="font-size: 14pt; font-family: Arial">Student Registration
-        System</span><br />
-        <span style="font-size: 10pt; font-family: Arial">
-            <br />
-            First, &nbsp;please select whether
-            you are a Student or Faculty &nbsp;&nbsp; &nbsp;&nbsp;
-        </span></strong></span>
-    <form name = "form1">
-    <input id="Radio1" name="group1" checked="checked" type="radio" /><strong><span style="font-size: 10pt;
-        font-family: Arial">STUDENT  &nbsp; &nbsp;<input id="Radio2" name="group1" type="radio" />FACULTY
-        &nbsp;
-        &nbsp; &nbsp;&nbsp;
-        
-        <input id="Button1" style="width: 60px" onclick="Button1_onclick()" type="button" value="Next-->" />
-        &nbsp;
-        <input id="Button2" style="width: 60px" onclick="javascript:history.back()" type="button" value="Cancel" /></span></strong>
-  		  </form> 		  
-    <img src="ComputerScience.JPG" /><br />
-    <br />
-    <span style="font-size: 9pt">
-    <strong><span style="font-family: Arial">Shang Yang, 10/19/2006, Demo
-        Version<br />
-        Department of Computer Science, State University of New York at Stony Brook</span></strong>
-    </span>
+<body style="text-align: center; background-color: #990000"
+	class="container">
+
+	<h2>Registration Form</h2>
+
+	<select class="form-control roleSelect">
+		<option value="cust">Customer</option>
+		<option value="emp">Employee</option>
+		<option value="man">Manager</option>
+	</select>
+
+	<div class="formDiv" id="custForm">
+		<form action="register.jsp" method="post" class="form-inline">
+		<input type="hidden" name="role" value="customer"/>
+			<table class="table table-striped">
+				<tr>
+					<th>First Name:</th>
+					<td><input class="form-control input-lg" name="firstName"
+						type="text" placeholder="First Name" required /></td>
+				</tr>
+				<tr>
+					<th>Last Name:</th>
+					<td><input class="form-control input-lg" name="lastName"
+						type="text" placeholder="Last Name" required /></td>
+				</tr>
+				<tr>
+					<th>Address:</th>
+					<td><input class="form-control input-lg" name="address"
+						type="text" placeholder="Address" /></td>
+				</tr>
+				<tr>
+					<th>City:</th>
+					<td><input class="form-control input-lg" name="city"
+						type="text" placeholder="City" /></td>
+				</tr>
+				<tr>
+					<th>State:</th>
+					<td><input class="form-control input-lg" name="state"
+						type="text" maxlength="2" placeholder="State" /></td>
+				</tr>
+				<tr>
+					<th>Zip Code:</th>
+					<td><input class="form-control input-lg" name="zipcode"
+						type="number" max="99999" placeholder="ZipCode" /></td>
+				</tr>
+				<tr>
+					<th>Telephone:</th>
+					<td><input class="form-control input-lg" name="telephone"
+						type="number" max="99999999999" placeholder="Telephone" /></td>
+				</tr>
+				<tr>
+					<th>Credit Card Number:</th>
+					<td><input class="form-control input-lg" name="ccn"
+						type="number" max="9999999999999999" placeholder="Credit Card Number" /></td>
+				</tr>
+				<tr>
+					<th>Email:</th>
+					<td><input class="form-control input-lg" name="email"
+						type="email" placeholder="email" /></td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td><input class="form-control input-lg" name="password"
+						type="password" placeholder="Password" required /></td>
+				</tr>
+				<tr>
+					<td><input id="Button1" class="btn btn-primary"
+						onclick="Button1_onclick()" type="submit" value="Submit" />
+						&nbsp; <input id="Button2" class="btn btn-danger"
+						onclick="javascript:history.back()" type="button" value="Cancel" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div class="formDiv" id="empForm" style="display: none">
+		<form action="register.jsp" method="post" class="form-inline">
+		<input type="hidden" name="role" value="employee"/>
+			<table class="table table-striped">
+				<tr>
+					<th>First Name:</th>
+					<td><input class="form-control input-lg" name="firstName"
+						type="text" placeholder="First Name" required /></td>
+				</tr>
+				<tr>
+					<th>Last Name:</th>
+					<td><input class="form-control input-lg" name="lastName"
+						type="text" placeholder="Last Name" required /></td>
+				</tr>
+				<tr>
+					<th>Address:</th>
+					<td><input class="form-control input-lg" name="address"
+						type="text" placeholder="Address" /></td>
+				</tr>
+				<tr>
+					<th>City:</th>
+					<td><input class="form-control input-lg" name="city"
+						type="text" placeholder="City" /></td>
+				</tr>
+				<tr>
+					<th>State:</th>
+					<td><input class="form-control input-lg" name="state"
+						type="text" maxlength="2" placeholder="State" /></td>
+				</tr>
+				<tr>
+					<th>Zip Code:</th>
+					<td><input class="form-control input-lg" name="zipcode"
+						type="number" max="99999" placeholder="ZipCode" /></td>
+				</tr>
+				<tr>
+					<th>Telephone:</th>
+					<td><input class="form-control input-lg" name="telephone"
+						type="number" max="99999999999" placeholder="Telephone" /></td>
+				</tr>
+				<tr>
+					<th>Social Security Number:</th>
+					<td><input class="form-control input-lg" name="ssn"
+						type="number" max="999999999" placeholder="Social Security Number" required/></td>
+				</tr>
+				<tr>
+					<th>Start Date:</th>
+					<td><input class="form-control input-lg" name="startDate"
+						type="date" required/></td>
+				</tr>
+				<tr>
+					<th>Hourly Rate:</th>
+					<td><input class="form-control input-lg" name="hourlyRate" placeholder="Hourly Rate" type="number" step="0.01" required/></td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td><input class="form-control input-lg" name="password"
+						type="password" placeholder="Password" required /></td>
+				</tr>
+				<tr>
+					<td><input id="Button1" class="btn btn-primary"
+						onclick="Button1_onclick()" type="submit" value="Submit" />
+						&nbsp; <input id="Button2" class="btn btn-danger"
+						onclick="javascript:history.back()" type="button" value="Cancel" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div class="formDiv" id="manForm" style="display: none">
+		<form action="register.jsp" method="post" class="form-inline">
+			<input type="hidden" name="role" value="manager"/>
+			<table class="table table-striped">
+				<tr>
+					<th>First Name:</th>
+					<td><input class="form-control input-lg" name="firstName"
+						type="text" placeholder="First Name" required /></td>
+				</tr>
+				<tr>
+					<th>Last Name:</th>
+					<td><input class="form-control input-lg" name="lastName"
+						type="text" placeholder="Last Name" required /></td>
+				</tr>
+				<tr>
+					<th>Address:</th>
+					<td><input class="form-control input-lg" name="address"
+						type="text" placeholder="Address" /></td>
+				</tr>
+				<tr>
+					<th>City:</th>
+					<td><input class="form-control input-lg" name="city"
+						type="text" placeholder="City" /></td>
+				</tr>
+				<tr>
+					<th>State:</th>
+					<td><input class="form-control input-lg" name="state"
+						type="text" maxlength="2" placeholder="State" /></td>
+				</tr>
+				<tr>
+					<th>Zip Code:</th>
+					<td><input class="form-control input-lg" name="zipcode"
+						type="number" max="99999" placeholder="ZipCode" /></td>
+				</tr>
+				<tr>
+					<th>Telephone:</th>
+					<td><input class="form-control input-lg" name="telephone"
+						type="number" max="99999999999" placeholder="Telephone" /></td>
+				</tr>
+				<tr>
+					<th>Social Security Number:</th>
+					<td><input class="form-control input-lg" name="ssn"
+						type="number" max="999999999" placeholder="Social Security Number" required/></td>
+				</tr>
+				<tr>
+					<th>Start Date:</th>
+					<td><input class="form-control input-lg" name="startDate"
+						type="date" required/></td>
+				</tr>
+				<tr>
+					<th>Hourly Rate:</th>
+					<td><input class="form-control input-lg" name="hourlyRate" placeholder="Hourly Rate" type="number" step="0.01" required/></td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td><input class="form-control input-lg" name="password"
+						type="password" placeholder="Password" required /></td>
+				</tr>
+				<tr>
+					<td><input id="Button1" class="btn btn-primary"
+						onclick="Button1_onclick()" type="submit" value="Submit" />
+						&nbsp; <input id="Button2" class="btn btn-danger"
+						onclick="javascript:history.back()" type="button" value="Cancel" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 </body>
 </html>

@@ -5,13 +5,6 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet"/>
 <script language="javascript" type="text/javascript">
 // <!CDATA[
-
-function Button1_onclick() {
-if(document.myForm.username.value == "")
-    alert("UserName Can Not Be Null!")
-javascript:myForm.submit()
-}
-
 function Button2_onclick() {
     window.open("RegisterPage.htm","_self");
 
@@ -20,7 +13,7 @@ function Button2_onclick() {
 // ]]>
 </script>
 </head>
-<body style="font-size: 12pt; text-align: center;background-color:#990000" class="container">
+<body style="text-align: center;background-color:#990000" class="container">
     <span style="font-family: Arial"><strong><span style="font-size: 14pt;color:white">Online Auction System</span></strong><br />
         <br />
         <img src="MainPage.JPG" /><br />
@@ -34,7 +27,7 @@ function Button2_onclick() {
         <input id="Password1" name="userpasswd" type="password" class="form-control"
 		placeHolder="Entery Your Password" required/>
         &nbsp;
-        <input id="Button1" class="btn btn-lg btn-primary btn-block" type="button" value="Log In" onclick="return Button1_onclick()" />
+        <input id="Button1" class="btn btn-lg btn-primary btn-block" type="submit" value="Log In"/>
         &nbsp;
         <input id="Button2" class="btn btn-lg btn-default btn-block" type="button" value="Register" onclick="return Button2_onclick()" /><br />
         <br />
