@@ -35,10 +35,10 @@
                             <span style="font-size: 10pt">Oper</span></td>
                     </tr>   
 <%
-		String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
-		String mysURL = "jdbc:mysql://sbcstldb.cs.stonybrook.edu:3306/cse305ta"; 
-		String mysUserID = "cse305ta"; 
-		String mysPassword = "107724115";
+		String mysJDBCDriver = "com.mysql.jdbc.Driver";  
+		String mysURL = "jdbc:mysql://localhost:3306/cse305"; 
+		String mysUserID = "root"; 
+		String mysPassword = "admin";
         
         String stuId = ""+session.getValue("login");
   			java.sql.Connection conn=null;

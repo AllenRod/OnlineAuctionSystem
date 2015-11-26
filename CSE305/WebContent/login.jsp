@@ -9,7 +9,7 @@
 		String username = request.getParameter("username");
 		String userpasswd = request.getParameter("userpasswd");
      	String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
-     	String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli"; 
+     	String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu/jiajli"; 
      	String mysUserID = "jiajli"; 
     	String mysPassword = "cse305QuickSilver";
     	
