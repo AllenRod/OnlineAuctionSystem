@@ -42,9 +42,9 @@ response.setDateHeader("Expires",0);
                         </tr>   
 <%
 			String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
-			String mysURL = "jdbc:mysql://sbcstldb.cs.stonybrook.edu:3306/cse305ta"; 
-			String mysUserID = "cse305ta"; 
-			String mysPassword = "107724115";
+			String mysURL = "jdbc:mysql://sbcstldb.cs.stonybrook.edu:3306/jiajli"; 
+			String mysUserID = "jiajli"; 
+			String mysPassword = "cse305QuickSilver";
   			java.sql.Connection conn=null;
 			try 
 			{
