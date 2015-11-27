@@ -6,6 +6,7 @@
 		response.sendRedirect("/");
 		return;
 	}
+
 	String username = request.getParameter("username");
 	String userpasswd = request.getParameter("userpasswd");
 	String mysJDBCDriver = "com.mysql.jdbc.Driver";
@@ -85,6 +86,7 @@
 				} catch (Exception ee) {
 				}
 				;
+
 			}
 		}
 	}

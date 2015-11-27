@@ -120,10 +120,4 @@
 		}
 		;
 	}
-	/*
-	 }
-	 */
 %>
-
-User Added!
-<a href="index.htm"><font color="Blue">Home</font></a>
