@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Representative Home Page</title>
+<title>Customer Representative Home Page - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -58,8 +58,8 @@
 
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">${firstName} ${lastName}<i class="fa fa-user fa-fw"></i> <i
-						class="fa fa-caret-down"></i>
+					data-toggle="dropdown" href="#">${firstName} ${lastName}<i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
@@ -80,16 +80,16 @@
 								Manager Info</a></li>
 						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
 								Employees</a></li>
-						
-						<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
-								Items</a></li>
+
+						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
+								Users</a></li>
 						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
 								Forms</a></li>
-						<li><a href="#"><i class="fa fa-wrench fa-fw"></i> Sales
-								By<span class="fa arrow"></span></a>
+						<li><a href="#"><i class="fa fa-users fa-fw"></i>
+								Customers<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="panels-wells.html">Item Name</a></li>
-								<li><a href="buttons.html">Customer Name</a></li>
+								<li><a href="newCustomer.html">New Customer</a></li>
+								<li><a href="buttons.html">Find Customer</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 						<li><a href="#"><i class="fa fa-sitemap fa-fw"></i>
 								Summary Revenue By<span class="fa arrow"></span></a>
@@ -111,7 +111,27 @@
 			<!-- /.navbar-static-side -->
 		</nav>
 
-		<div id="page-wrapper"></div>
+		<div id="page-wrapper">
+			<h2>Personal Information</h2>
+			<form name="myForm" action="register.jsp" method="post">
+				<div class="form-group">
+					<label>First Name</label> <input class="form-control"
+						name="firstName" value="${firstName}" required />
+				</div>
+				<div class="form-group">
+					<label>Last Name</label> <input class="form-control"
+						name="lastName" value="${lastName}" required />
+				</div>
+				<div class="form-group">
+					<label>Social Security Number</label> <input class="form-control"
+						name="ssn" value="${ssn}" type="number" max="999999999" required/>
+				</div>
+				<div class="form-group">
+					<label>Address</label> <input class="form-control"
+						name="address" value="${address}" required />
+				</div>
+			</form>
+		</div>
 		<!-- /#page-wrapper -->
 
 	</div>
