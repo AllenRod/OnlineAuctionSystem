@@ -38,7 +38,7 @@
 			    	alert("Please fill out all fields!")
 			    else if(document.myForm.password.value != document.myForm.passwordvrf.value)
 			    	alert("Password not matching!")
-				document.myForm.submit()
+				else document.myForm.submit()
 			}
 			function Button2_onclick() {
 		    	window.open("RegisterPage.htm","_self");
@@ -55,7 +55,7 @@
 	                        <h3 class="panel-title">Online Auction House Manager Registration</h3>
 	                    </div>
 	                    <div class="panel-body">
-	                        <form name="myForm" action="useradd.jsp" method="post" role="form">
+	                        <form name="myForm" action="register.jsp" method="post" role="form">
 	                            <fieldset>
 	                                <div class="form-group">
 	                                	<label style="font-size: 10pt">Enter your ID: </label>
