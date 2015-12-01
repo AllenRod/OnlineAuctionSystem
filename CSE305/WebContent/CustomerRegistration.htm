@@ -23,21 +23,24 @@
 	
 		<script language="javascript" type="text/javascript">
 			function Button1_onclick() {
-				if(document.myForm.userID.value == "" ||
+				if(document.myForm.email.value == "" ||
 						document.myForm.firstName.value == "" ||
 						document.myForm.lastName.value == "" ||
-						document.myForm.ssn.value == "" ||
 						document.myForm.address.value == "" ||
 						document.myForm.city.value == "" ||
 						document.myForm.state.value == "" ||
 						document.myForm.zipcode.value == "" ||
 						document.myForm.telephone.value == "" ||
 						document.myForm.password.value == ""
-						)
-			    	alert("Please fill out all fields!")
-			    else if(document.myForm.password.value != document.myForm.passwordvrf.value)
-			    	alert("Password not matching!")
-				else document.myForm.submit()
+						){
+					alert("Please fill out all fields!");
+					return false;
+				}
+			    else if(document.myForm.password.value != document.myForm.passwordvrf.value) {
+			    	alert("Password not matching!") ;
+			    	return false;
+			    }
+				document.myForm.submit()
 			}
 			function Button2_onclick() {
 		    	window.open("RegisterPage.htm","_self");

@@ -24,7 +24,6 @@
 		<script language="javascript" type="text/javascript">
 			function Button1_onclick() {
 				if(document.myForm.userID.value == "" ||
-						document.myForm.employmentLevel.selected ||
 						document.myForm.firstName.value == "" ||
 						document.myForm.lastName.value == "" ||
 						document.myForm.ssn.value == "" ||
@@ -34,10 +33,14 @@
 						document.myForm.zipcode.value == "" ||
 						document.myForm.telephone.value == "" ||
 						document.myForm.password.value == ""
-						)
-			    	alert("Please fill out all fields!")
-			    else if(document.myForm.password.value != document.myForm.passwordvrf.value)
-			    	alert("Password not matching!")
+						) {
+			    	alert("Please fill out all fields!");
+			    	return false;
+				}
+			    else if(document.myForm.password.value != document.myForm.passwordvrf.value) {
+			    	alert("Password not matching!") ;
+			    	return false;
+			    }
 				else document.myForm.submit()
 			}
 			function Button2_onclick() {
