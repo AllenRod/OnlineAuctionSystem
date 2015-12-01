@@ -113,7 +113,12 @@
 
 		<div id="page-wrapper">
 			<h2>Personal Information</h2>
-			<form name="myForm" action="register.jsp" method="post">
+			<form name="myForm" action="editInfo.jsp" method="post">
+				<input type="hidden" name="level" value="${level}"/>
+				<div class="form-group">
+					<label>ID</label> <input class="form-control"
+						name="id" value="${id}" readonly />
+				</div>
 				<div class="form-group">
 					<label>First Name</label> <input class="form-control"
 						name="firstName" value="${firstName}" required />
@@ -128,8 +133,25 @@
 				</div>
 				<div class="form-group">
 					<label>Address</label> <input class="form-control"
-						name="address" value="${address}" required />
+						name="address" value="${address}"/>
 				</div>
+				<div class="form-group">
+					<label>City</label> <input class="form-control"
+						name="city" value="${city}"/>
+				</div>
+				<div class="form-group">
+					<label>State</label> <input class="form-control"
+						name="state" type="text" maxlength="2" value="${state}"/>
+				</div>
+				<div class="form-group">
+					<label>Zip Code</label> <input class="form-control"
+						name="zipcode" type="number" max="99999" value="${zipcode}" />
+				</div>
+				<div class="form-group">
+					<label>Telephone</label> <input class="form-control"
+						name="telephone" value="${telephone}" type="number" max="9999999999"/>
+				</div>
+				<button type="submit" class="btn btn-primary">Edit</button>
 			</form>
 		</div>
 		<!-- /#page-wrapper -->

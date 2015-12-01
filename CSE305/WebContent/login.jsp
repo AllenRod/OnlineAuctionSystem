@@ -60,8 +60,16 @@
 						session.setAttribute("login", username);
 						String firstName = rs.getNString("FirstName");
 						String lastName = rs.getNString("LastName");
+						session.setAttribute("id", rs.getInt("ID"));
 						session.setAttribute("firstName", firstName);
 						session.setAttribute("lastName", lastName);
+						session.setAttribute("ssn", rs.getInt("SSN"));
+						session.setAttribute("address", rs.getNString("Address"));
+						session.setAttribute("city", rs.getNString("City"));
+						session.setAttribute("state", rs.getNString("State"));
+						session.setAttribute("zipcode", rs.getInt("ZipCode"));
+						session.setAttribute("telephone", rs.getLong("Telephone"));
+						session.setAttribute("level", rs.getInt("Level"));
 						if (rs.getInt("Level") == 0) {
 							response.sendRedirect("EmployeeHome.jsp");
 							System.out.println("Login as employee "
