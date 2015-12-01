@@ -1,195 +1,221 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
-	<head>
-		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
-	
-	    <title>Employee Registration -- OAS</title>
-	
-	    <!-- Bootstrap Core CSS -->
-	    <link href="template_admin2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-	
-	    <!-- MetisMenu CSS -->
-	    <link href="template_admin2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet"/>
-	
-	    <!-- Custom CSS -->
-	    <link href="template_admin2/dist/css/sb-admin-2.css" rel="stylesheet"/>
-	
-	    <!-- Custom Fonts -->
-	    <link href="template_admin2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	
-		<script language="javascript" type="text/javascript">
-			function Button1_onclick() {
-				if(document.myForm.userID.value == "" ||
-						document.myForm.firstName.value == "" ||
-						document.myForm.lastName.value == "" ||
-						document.myForm.ssn.value == "" ||
-						document.myForm.address.value == "" ||
-						document.myForm.city.value == "" ||
-						document.myForm.state.value == "" ||
-						document.myForm.zipcode.value == "" ||
-						document.myForm.telephone.value == "" ||
-						document.myForm.password.value == ""
-						) {
-			    	alert("Please fill out all fields!");
-			    	return false;
-				}
-			    else if(document.myForm.password.value != document.myForm.passwordvrf.value) {
-			    	alert("Password not matching!") ;
-			    	return false;
-			    }
-				else document.myForm.submit()
-			}
-			function Button2_onclick() {
-		    	window.open("RegisterPage.htm","_self");
-			}
-		</script>
-	</head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
 
-	<body>
-	    <div class="container">
-	        <div class="row">
-	            <div class="col-md-4 col-md-offset-4">
-	                <div class="login-panel panel panel-default">
-	                    <div class="panel-heading">
-	                        <h3 class="panel-title">Online Auction House Employee Registration</h3>
-	                    </div>
-	                    <div class="panel-body">
-	                        <form name="myForm" action="register.jsp" method="post" role="form">
-	                            <fieldset>
-	                                <div class="form-group">
+<title>Employee Registration -- OAS</title>
+
+<!-- Bootstrap Core CSS -->
+<link
+	href="template_admin2/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- MetisMenu CSS -->
+<link
+	href="template_admin2/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet" />
+
+<!-- Custom CSS -->
+<link href="template_admin2/dist/css/sb-admin-2.css" rel="stylesheet" />
+
+<!-- Custom Fonts -->
+<link
+	href="template_admin2/bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+	function Button1_onclick() {
+		if (document.myForm.firstName.value == ""
+				|| document.myForm.lastName.value == ""
+				|| document.myForm.ssn.value == ""
+				|| document.myForm.startDate == ""
+				|| document.myForm.hourlyRate == ""
+				|| document.myForm.password.value == "") {
+			alert("Please fill out all fields!");
+			return false;
+		} else if (document.myForm.password.value != document.myForm.passwordvrf.value) {
+			alert("Password not matching!");
+			return false;
+		} else
+			document.myForm.submit()
+	}
+	function Button2_onclick() {
+		window.open("RegisterPage.htm", "_self");
+	}
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-panel panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Online Auction House Employee
+							Registration</h3>
+					</div>
+					<div class="panel-body">
+						<form name="myForm" action="register.jsp" method="post">
+							<input class="form-control" name="role" type="hidden"
+								value="employee" />
+							<fieldset>
+								<!--<div class="form-group">
 	                                	<label style="font-size: 10pt">Enter your ID: </label>
-	                                    <input class="form-control" placeholder="Your assigned work ID" id="userID" name="userID" type="text" value="" autofocus>
-	                                </div>
-	                                <div class="form-group">
-	                                	<label>Are you a manager or a customer representative? </label>
-	                                	<div class="radio">
-	                                    	<label>
-		                                    	<input id="managerLevel" name="employmentLevel" type="radio" value="2">Manager
-		                                   	</label>
-		                                </div>
-		                                <div class="radio">
-	                                    	<label>
-		                                   		<input id="customerRepresentativeLevel" name="employmentLevel" type="radio" value="1" checked>Customer Representative
-		                                   	</label>
-		                                </div>
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your First Name: </label>
-	                                    <input class="form-control" placeholder="Your legal first name" id="firstName" name="firstName" type="text" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your Last Name: </label>
-	                                    <input class="form-control" placeholder="Your legal last name" id="lastName" name="lastName" type="text" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your SSN: </label>
-	                                    <input class="form-control" placeholder="9 digit SSN without dash" id="ssn" name="ssn" type="text" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your start date: </label>
-	                                    <input class="form-control" placeholder="MM/DD/YYYY" id="startDate" name="startDate" type="date" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your hourly rate: </label>
-	                                    <input class="form-control" placeholder="$" id="salary" name="salary" type="number" min="0" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your Address: </label>
-	                                    <input class="form-control" placeholder="Street Address" id="address" name="address" type="text" value="">
-	                                    <input class="form-control" placeholder="City" id="city" name="city" type="text" value="">
-	                                    <select class="form-control" id="state" name="state">
-											<option value="" selected>State</option>
-											<option value="AL">AL</option>
-											<option value="AK">AK</option>
-											<option value="AZ">AZ</option>
-											<option value="AR">AR</option>
-											<option value="CA">CA</option>
-											<option value="CO">CO</option>
-											<option value="CT">CT</option>
-											<option value="DE">DE</option>
-											<option value="FL">FL</option>
-											<option value="GA">GA</option>
-											<option value="HI">HI</option>
-											<option value="ID">ID</option>
-											<option value="IL">IL</option>
-											<option value="IN">IN</option>
-											<option value="IA">IA</option>
-											<option value="KS">KS</option>
-											<option value="KY">KY</option>
-											<option value="LA">LA</option>
-											<option value="ME">ME</option>
-											<option value="MD">MD</option>
-											<option value="MA">MA</option>
-											<option value="MI">MI</option>
-											<option value="MN">MN</option>
-											<option value="MS">MS</option>
-											<option value="MO">MO</option>
-											<option value="MT">MT</option>
-											<option value="NE">NE</option>
-											<option value="NV">NV</option>
-											<option value="NH">NH</option>
-											<option value="NJ">NJ</option>
-											<option value="NM">NM</option>
-											<option value="NY">NY</option>
-											<option value="NC">NC</option>
-											<option value="ND">ND</option>
-											<option value="OH">OH</option>
-											<option value="OK">OK</option>
-											<option value="OR">OR</option>
-											<option value="PA">PA</option>
-											<option value="RI">RI</option>
-											<option value="SC">SC</option>
-											<option value="SD">SD</option>
-											<option value="TN">TN</option>
-											<option value="TX">TX</option>
-											<option value="UT">UT</option>
-											<option value="VT">VT</option>
-											<option value="VA">VA</option>
-											<option value="WA">WA</option>
-											<option value="WV">WV</option>
-											<option value="WI">WI</option>
-											<option value="WY">WY</option>
-											<option value="OT">OTHERS</option>
-										</select>
-	                                    <input class="form-control" placeholder="Zip Code" id="zipcode" name="zipcode" type="text" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Enter your phone number: </label>
-	                                    <input class="form-control" placeholder="10 digit number without dash" id="telephone" name="telephone" type="text" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Create a password: </label>
-	                                    <input class="form-control" placeholder="Max 16 characters" id="password" name="password" type="password" value="">
-	                                </div>
-	                                <div class="form-group">
-	                                	<label style="font-size: 10pt">Re-enter your password: </label>
-	                                    <input class="form-control" placeholder="Repeat the password entered" id="passwordvrf" name="passwordvrf" type="password" value="">
-	                                </div>
-	                                <button id="Button1" type="submit" value="SignUp" onclick="return Button1_onclick()" class="btn btn-success btn-lg btn-block">Create Account</button>
-	                                <button id="Button2" type="button" value="GoBack" onclick="return Button2_onclick()" class="btn btn-success btn-lg btn-block">Go Back</button>
-	                            </fieldset>
-	                        </form>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	
-	    <!-- jQuery -->
-	    <script src="template_admin2/bower_components/jquery/dist/jquery.min.js"></script>
-	
-	    <!-- Bootstrap Core JavaScript -->
-	    <script src="template_admin2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
-	    <!-- Metis Menu Plugin JavaScript -->
-	    <script src="template_admin2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-	
-	    <!-- Custom Theme JavaScript -->
-	    <script src="template_admin2/dist/js/sb-admin-2.js"></script>
+	                                    <input class="form-control" placeholder="Your assigned work ID" id="userID" name="userID" type="text" value="" autofocus/>
+	                                </div>-->
+								<div class="form-group">
+									<label>Are you a manager or a customer representative?
+									</label>
+									<div class="radio">
+										<label> <input id="managerLevel"
+											name="employmentLevel" type="radio" value="1" />Manager
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input id="customerRepresentativeLevel"
+											name="employmentLevel" type="radio" value="0" checked />Customer
+											Representative
+										</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your First Name: </label>
+									<input class="form-control" placeholder="Your legal first name"
+										id="firstName" name="firstName" type="text" required />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your Last Name: </label> <input
+										class="form-control" placeholder="Your legal last name"
+										id="lastName" name="lastName" type="text" required />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your SSN: </label> <input
+										class="form-control" placeholder="9 digit SSN without dash"
+										id="ssn" name="ssn" type="number" max="999999999" required />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your start date: </label>
+									<input class="form-control" placeholder="Start Date"
+										id="startDate" name="startDate" type="date" required />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your hourly rate:
+									</label> <input class="form-control" placeholder="Hourly Salary"
+										id="salary" name="hourlyRate" type="number" step="0.01"
+										required />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your Address: </label> <input
+										class="form-control" placeholder="Street Address" id="address"
+										name="address" type="text" value="" /> <input
+										class="form-control" placeholder="City" id="city" name="city"
+										type="text" value="" /> <select class="form-control"
+										id="state" name="state">
+										<option value="" selected>State</option>
+										<option value="AL">AL</option>
+										<option value="AK">AK</option>
+										<option value="AZ">AZ</option>
+										<option value="AR">AR</option>
+										<option value="CA">CA</option>
+										<option value="CO">CO</option>
+										<option value="CT">CT</option>
+										<option value="DE">DE</option>
+										<option value="FL">FL</option>
+										<option value="GA">GA</option>
+										<option value="HI">HI</option>
+										<option value="ID">ID</option>
+										<option value="IL">IL</option>
+										<option value="IN">IN</option>
+										<option value="IA">IA</option>
+										<option value="KS">KS</option>
+										<option value="KY">KY</option>
+										<option value="LA">LA</option>
+										<option value="ME">ME</option>
+										<option value="MD">MD</option>
+										<option value="MA">MA</option>
+										<option value="MI">MI</option>
+										<option value="MN">MN</option>
+										<option value="MS">MS</option>
+										<option value="MO">MO</option>
+										<option value="MT">MT</option>
+										<option value="NE">NE</option>
+										<option value="NV">NV</option>
+										<option value="NH">NH</option>
+										<option value="NJ">NJ</option>
+										<option value="NM">NM</option>
+										<option value="NY">NY</option>
+										<option value="NC">NC</option>
+										<option value="ND">ND</option>
+										<option value="OH">OH</option>
+										<option value="OK">OK</option>
+										<option value="OR">OR</option>
+										<option value="PA">PA</option>
+										<option value="RI">RI</option>
+										<option value="SC">SC</option>
+										<option value="SD">SD</option>
+										<option value="TN">TN</option>
+										<option value="TX">TX</option>
+										<option value="UT">UT</option>
+										<option value="VT">VT</option>
+										<option value="VA">VA</option>
+										<option value="WA">WA</option>
+										<option value="WV">WV</option>
+										<option value="WI">WI</option>
+										<option value="WY">WY</option>
+										<option value="OT">OTHERS</option>
+									</select> <input class="form-control" placeholder="Zip Code"
+										id="zipcode" name="zipcode" type="nubmer" max="99999" />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Enter your phone number:
+									</label> <input class="form-control"
+										placeholder="10 digit number without dash" id="telephone"
+										name="telephone" type="number" max="99999999999" />
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Create a password: </label> <input
+										class="form-control" placeholder="Max 16 characters"
+										id="password" name="password" type="password" required/>
+								</div>
+								<div class="form-group">
+									<label style="font-size: 10pt">Re-enter your password:
+									</label> <input class="form-control"
+										placeholder="Repeat the password entered" id="passwordvrf"
+										name="passwordvrf" type="password" value="" />
+								</div>
+								<button id="Button1" type="submit" value="SignUp"
+									onclick="return Button1_onclick()"
+									class="btn btn-success btn-lg btn-block">Create
+									Account</button>
+								<button id="Button2" type="button" value="GoBack"
+									onclick="return Button2_onclick()"
+									class="btn btn-success btn-lg btn-block">Go Back</button>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	</body>
+	<!-- jQuery -->
+	<script
+		src="template_admin2/bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="template_admin2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="template_admin2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="template_admin2/dist/js/sb-admin-2.js"></script>
+
+</body>
 </html>

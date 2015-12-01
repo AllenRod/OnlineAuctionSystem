@@ -85,19 +85,11 @@
 			String ssn = request.getParameter("ssn");
 			String startDateStr = request.getParameter("startDate");
 			String hourlyRate = request.getParameter("hourlyRate");
+			String level = request.getParameter("employmentLevel");
 			stmt1.executeUpdate("INSERT INTO Employee VALUES('" + id
 					+ "','" + ssn + "','" + startDateStr + "','"
-					+ hourlyRate + "', 0)");
-			out.print("Inserted new employee with ID " + id);
-			stmt1.close();
-		} else if (role.equals("manager")) {
-			String ssn = request.getParameter("ssn");
-			String startDateStr = request.getParameter("startDate");
-			String hourlyRate = request.getParameter("hourlyRate");
-			stmt1.executeUpdate("INSERT INTO Employee VALUES('" + id
-					+ "','" + ssn + "','" + startDateStr + "','"
-					+ hourlyRate + "', 1)");
-			out.print("Inserted new manager with ID " + id);
+					+ hourlyRate + "','" + level + "')");
+			out.print("Inserted new employee with ID " + id + " with level " + level);
 			stmt1.close();
 		}
 	} catch (Exception e) {
