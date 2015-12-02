@@ -57,7 +57,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        ${firstname} ${lastname}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        ${firstName} ${lastName}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -77,17 +77,19 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li><a href="CustomerInformation.jsp"><i class="fa fa-dashboard fa-fw"></i>
+						<li><a href="CustomerHome.jsp"><i class="fa fa-user fa-fw"></i>
+								Customer Homepage</a></li>
+						<li><a href="CustomerInformation.jsp"><i class="fa fa-edit fa-fw"></i>
 								Personal Information</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+						<li><a href="AllListings.jsp"><i class="fa fa-search fa-fw"></i>
 								Browse All Listings</a></li>
-						<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
-								Search for Sellers</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
+						<li><a href="AllCustomers.jsp"><i class="fa fa-users fa-fw"></i>
+								Our Sellers/Buyers</a></li>
+						<li><a href="PurchaseHistory.jsp"><i class="fa fa-usd fa-fw"></i>
 								Purchase History</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
+						<li><a href="ListingHistory.jsp"><i class="fa fa-bullhorn fa-fw"></i>
 								Listing History</a></li>
-                    </ul>
+					</ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -95,6 +97,28 @@
         </nav>
 
         <div id="page-wrapper">
+        	<div class="input-group">
+				<form name="myForm" action=".jsp" method="post" role="form">
+					<fieldset>
+						<div>
+	                        <label style="font-size: 10pt">Search within a particular item type </label>
+							<select id="itemType" name="itemType">
+								<option value="" selected></option>
+								<option value="books">Books</option>
+								<option value="electronics">Electronics</option>
+								<option value="apparel">Apparel</option>
+								<option value="car">Car</option>
+								<option value="kitchen">Kitchen</option>
+								<option value="DVD">DVD</option>
+							</select>
+							<label style="font-size: 10pt">   and/or   </label>
+							<input id="keywords" type="text" name="keywords" placeholder="using item keywords" />
+                    		<button id="searchButton" onclick="return Button1_onclick()">Search</button>
+						</div>
+					</fieldset>
+				</form>
+				
+            </div>
             <h2>All Auction Listings</h2>
             <div class="panel-body">
                             <div class="table-responsive">
@@ -102,6 +126,7 @@
                                     <thead>
                                         <tr>
                                         	<th>Auction ID</th>
+                                        	<th>Seller ID</th>
                                             <th>Item ID</th>
                                             <th>Item Name</th>
                                             <th>Item Type</th>
@@ -131,34 +156,30 @@
             
                         java.sql.Statement stmt1=conn.createStatement();
         
-                    java.sql.ResultSet rs = stmt1.executeQuery("SELECT P.FirstName, I.ItemName, I.ItemID, I.ItemType, A.EmployeeID, B.BidAmt,L.AuctionID"
-                    		+ " FROM Person P,Customer C,Item I,Bidon B, Auction A, List L"
-                    		+ " WHERE P.ID = C.CustomerID "
-                    		+ " AND C.CustomerID = L.SellerID" 
-                    		+ " AND L.AuctionID = A.AuctionID" 
-                    		+ " AND A.Status = 'CLOSED'" 
-                    		+ " AND L.AuctionID = B.AuctionID" 
-                    		+ " AND I.ItemID = A.ItemID" 
-                    		+ " AND B.BidAmt >= (SELECT MAX(B1.BidAmt) FROM Bidon B1)");
+                    java.sql.ResultSet rs = stmt1.executeQuery("SELECT A.AuctionID, L.SellerID, A.ItemID, I.ItemName, I.ItemType, A.CurrentBid, L.ClosingDate"
+                    		+ " FROM Item I, Auction A, List L"
+                    		+ " WHERE A.ItemID = I.ItemID "
+                    		+ " AND A.AuctionID = L.AuctionID");
+               
           while(rs.next())
             {
 %>
-                    <tr>
-                      <td style="width: 74px">
+                  <tr>
+                      <td style="width: 80px">
                           <span style="font-size: 10pt"><%=rs.getString(1)%></span></td>
-                      <td style="width: 74px">
+                      <td style="width: 80px">
                           <span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
-                      <td style="width: 74px">
-                            <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-                      <td style="width: 74px">
+                      <td style="width: 80px">
+                          <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
+                      <td style="width: 80px">
                           <span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-                      <td style="width: 74px">
+                      <td style="width: 80px">
                           <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-                      <td style="width: 74px">
+                      <td style="width: 80px">
                           <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>   
-                      <td style="width: 74px">
+                      <td style="width: 150px">
                           <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>                                                             
-                    </tr>
+                  </tr>
 <%              
             }
             } catch(Exception e)
