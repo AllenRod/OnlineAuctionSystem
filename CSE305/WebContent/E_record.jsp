@@ -58,7 +58,7 @@
 							+ auctionID
 							+ "')) AND B.BidAmt >=(SELECT MAX(B1.BidAmt) FROM Bidon B1 WHERE B1.AuctionID='"
 							+ auctionID + "')");
-			session.setAttribute("", );
+			session.setAttribute("", "");
 			stmt1.close();
 		}
 	} catch (Exception e) {
