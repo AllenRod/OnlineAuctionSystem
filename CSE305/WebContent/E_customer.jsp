@@ -43,7 +43,7 @@
 			System.out.println("Customer not found");
 			session.setAttribute("customerID", "");
 			session.setAttribute("returnVal", "Customer Not Found");
-			response.sendRedirect("findCustomer.jsp");
+			response.sendRedirect("E_findCustomer.jsp");
 			stmt1.close();
 			return;
 		} else {
@@ -64,7 +64,7 @@
 			session.setAttribute("itemPurchase", rs.getInt(13));
 			session.setAttribute("email", rs.getNString(14));
 			stmt1.close();
-			response.sendRedirect("findCustomer.jsp");
+			response.sendRedirect("E_findCustomer.jsp");
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

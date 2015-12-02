@@ -78,19 +78,19 @@
 					<ul class="nav" id="side-menu">
 						<li><a href="EmployeeHome.jsp"><i class="fa fa-home fa-fw"></i>
 								Home</a></li>
-						<li><a href="saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
+						<li><a href="E_saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
 								Record Sale</a></li>
 						<li><a href="E_mailList.jsp"><i class="fa fa-envelope fa-fw"></i>
 								Mailing List</a></li>
-						<li><a href="#"><i class="fa fa-th-list fa-fw"></i>
+						<li><a href="E_itemSugg.jsp"><i class="fa fa-th-list fa-fw"></i>
 								Item Suggestions</a></li>
-						<li><a href="#"><i class="fa fa-file-text fa-fw"></i>
+						<li><a href="E_receipt.jsp"><i class="fa fa-file-text fa-fw"></i>
 								Receipt</a></li>	
 						<li><a href="#"><i class="fa fa-users fa-fw"></i>
 								Customers<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="CustomerRegistration.htm">New Customer</a></li>
-								<li><a href="findCustomer.jsp">Find Customer</a></li>
+								<li><a href="E_findCustomer.jsp">Find Customer</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 						<li><a href="E_allEmp.jsp"><i class="fa fa-users fa-fw"></i>
 								Employee Info</a></li>
