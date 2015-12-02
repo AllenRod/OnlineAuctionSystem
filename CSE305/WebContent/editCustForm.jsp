@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Representative Sale Record - OAS</title>
+<title>Customer Representative Customer Edit - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -77,17 +76,10 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="EmployeeHome.jsp"><i
-								class="fa fa-home fa-fw"></i>Home</a></li>
+						<li><a href="EmployeeHome.jsp"><i class="fa fa-home fa-fw"></i>
+								Home</a></li>
 						<li><a href="saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
 								Record Sale</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Employees</a></li>
-
-						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
-								Users</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-								Forms</a></li>
 						<li><a href="#"><i class="fa fa-users fa-fw"></i>
 								Customers<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
@@ -115,51 +107,73 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<h2>Sales Record</h2>
-			<div>
-				<form name="myForm" action="E_record.jsp" method="post">
-					<div class="form-control">
-						<label>Search Auction:</label> <input type="number"
-							name="auctionNum" required />
-					</div>
-					<div>
-						<button type="submit" class="btn btn-primary">Search</button>
-					</div>
-				</form>
-			</div>
-			<c:if test="${not empty returnVal and returnVal ne ''}">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="alert alert-danger">${returnVal}</div>
-					</div>
+			<h2>Cstomer Edit Page</h2>
+			<form name="myForm" action="editCustInfo.jsp" method="post">
+				<div class="form-group">
+					<label>ID</label> <input class="form-control" name="id"
+						value="${customerID}" readonly />
 				</div>
-			</c:if>
-			<div class="row">
-				<table class="table table-striped">
-					<tr>
-						<th>Auction ID</th>
-						<th>Item ID</th>
-						<th>Item Name</th>
-						<th>Buyer ID</th>
-						<th>Buyer Name</th>
-						<th>Seller ID</th>
-						<th>Price</th>
-						<th>Transaction Date</th>
-					</tr>
-					<tr>
-						<c:if test="${auctionID ne ''}">
-							<td>${auctionID}</td>
-							<td>${itemID}</td>
-							<td>${itemName}</td>
-							<td>${buyerID}</td>
-							<td>${buyerName}</td>
-							<td>${sellerID}</td>
-							<td>${paidAmt}</td>
-							<td>${close}</td>
-						</c:if>
-					</tr>
-				</table>
-			</div>
+				<div class="form-group">
+					<label>First Name</label> <input class="form-control"
+						name="firstName" value="${cfirstName}" required />
+				</div>
+				<div class="form-group">
+					<label>Last Name</label> <input class="form-control"
+						name="lastName" value="${clastName}" required />
+				</div>
+				<div class="form-group">
+					<label>Address</label> <input class="form-control" name="address"
+						value="${caddress}" />
+				</div>
+				<div class="form-group">
+					<label>City</label> <input class="form-control" name="city"
+						value="${ccity}" />
+				</div>
+				<div class="form-group">
+					<label>State</label> <input class="form-control" name="state"
+						type="text" maxlength="2" value="${cstate}" />
+				</div>
+				<div class="form-group">
+					<label>Zip Code</label> <input class="form-control" name="zipcode"
+						type="number" max="99999" value="${czip}" />
+				</div>
+				<div class="form-group">
+					<label>Telephone</label> <input class="form-control"
+						name="telephone" value="${ctel}" type="number"
+						max="9999999999" />
+				</div>
+				<div class="form-group">
+					<label>Credit Card Number</label> <input class="form-control"
+						name="ccn" value="${ccn}" type="number"
+						max="9999999999999999" />
+				</div>
+				<div class="form-group">
+					<label>Buyer Rating</label> <input class="form-control"
+						name="buyerRating" value="${buyerRating}" type="number"
+						max="9" />
+				</div>
+				<div class="form-group">
+					<label>Seller Rating</label> <input class="form-control"
+						name="sellerRating" value="${sellerRating}" type="number"
+						max="9" />
+				</div>
+				<div class="form-group">
+					<label>Items Sold</label> <input class="form-control"
+						name="sold" value="${itemSold}" type="number"
+						max="99999" />
+				</div>
+				<div class="form-group">
+					<label>Items Purchased</label> <input class="form-control"
+						name="purchase" value="${itemPurchase}" type="number"
+						max="99999" />
+				</div>
+				<div class="form-group">
+					<label>Email</label> <input class="form-control"
+						name="email" value="${email}" type="text"
+						/>
+				</div>
+				<button type="submit" class="btn btn-primary">Edit</button>
+			</form>
 		</div>
 		<!-- /#page-wrapper -->
 

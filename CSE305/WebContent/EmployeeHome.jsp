@@ -80,18 +80,11 @@
 								Home</a></li>
 						<li><a href="saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
 								Record Sale</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Employees</a></li>
-
-						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
-								Users</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-								Forms</a></li>
 						<li><a href="#"><i class="fa fa-users fa-fw"></i>
 								Customers<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="newCustomer.html">New Customer</a></li>
-								<li><a href="buttons.html">Find Customer</a></li>
+								<li><a href="CustomerRegistration.htm">New Customer</a></li>
+								<li><a href="findCustomer.jsp">Find Customer</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 						<li><a href="#"><i class="fa fa-sitemap fa-fw"></i>
 								Summary Revenue By<span class="fa arrow"></span></a>

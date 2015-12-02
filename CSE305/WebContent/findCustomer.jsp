@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Representative Sale Record - OAS</title>
+<title>Customer Representative Customer Management - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -115,12 +115,12 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<h2>Sales Record</h2>
+			<h2>Customer Management</h2>
 			<div>
-				<form name="myForm" action="E_record.jsp" method="post">
+				<form name="myForm" action="E_customer.jsp" method="post">
 					<div class="form-control">
-						<label>Search Auction:</label> <input type="number"
-							name="auctionNum" required />
+						<label>Search Customer:</label> <input type="number"
+							name="customerNum" required />
 					</div>
 					<div>
 						<button type="submit" class="btn btn-primary">Search</button>
@@ -137,27 +137,43 @@
 			<div class="row">
 				<table class="table table-striped">
 					<tr>
-						<th>Auction ID</th>
-						<th>Item ID</th>
-						<th>Item Name</th>
-						<th>Buyer ID</th>
-						<th>Buyer Name</th>
-						<th>Seller ID</th>
-						<th>Price</th>
-						<th>Transaction Date</th>
+						<th>Customer ID</th>
+						<th>Name</th>
+						<th>Full Address</th>
+						<th>Telephone</th>
+						<th>CreditCardNum</th>
+						<th>Buyer Rating</th>
+						<th>Seller Rating</th>
+						<th>Item Sold</th>
+						<th>Item Purchase</th>
+						<th>Email</th>
 					</tr>
-					<tr>
-						<c:if test="${auctionID ne ''}">
-							<td>${auctionID}</td>
-							<td>${itemID}</td>
-							<td>${itemName}</td>
-							<td>${buyerID}</td>
-							<td>${buyerName}</td>
-							<td>${sellerID}</td>
-							<td>${paidAmt}</td>
-							<td>${close}</td>
-						</c:if>
-					</tr>
+					<c:if test="${not empty customerID and customerID ne ''}">
+						<tr>
+							<td>${customerID}</td>
+							<td><c:out value="${cfirstName} ${clastName}" /></td>
+							<td><c:out value="${caddress} ${ccity} ${cstate} ${czip}" /></td>
+							<td>${ctel}</td>
+							<td>${ccn}</td>
+							<td>${buyerRating}</td>
+							<td>${sellerRating}</td>
+							<td>${itemSold}</td>
+							<td>${itemPurchase}</td>
+							<td>${email}</td>
+						</tr>
+						<tr>
+							<th>
+								<form action="editCustForm.jsp" method="post">
+									<button class="btn btn-primary" type="submit">Edit</button>
+								</form>
+							</th>
+							<th>
+							<form action="delCust.jsp" method="post">
+								<button class="btn btn-danger" type="submit">Delete</button>
+							</form>
+							</th>
+						</tr>
+					</c:if>
 				</table>
 			</div>
 		</div>
