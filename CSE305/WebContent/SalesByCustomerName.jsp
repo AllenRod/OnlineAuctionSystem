@@ -190,37 +190,29 @@
         </nav>
 
         <div id="page-wrapper">
-            <h2>Items</h2>
+            <h2>Sales By Customer Name</h2>
             <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ItemID</th>
+                                        	<th>First Name</th>
                                             <th>Item Name</th>
+                                            <th>Item ID</th>
                                             <th>Item Type</th>
-                                            <th>Description</th>
-                                            <th>Year Manufactured</th>
-                                            <th>Copies Sold</th>
-                                            <th>Amount in Stock</th>
+                                            <th>Auction ID</th>
+                                            <th>Employee ID</th>
+                                            <th>Bid Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-        String itemId=request.getParameter("ItemID");
-        String itemName=request.getParameter("ItemName");
-        String itemType=request.getParameter("ItemType");
-        String descr=request.getParameter("Description");
-        String yearManu=request.getParameter("YearManu");
-        String copiesSold=request.getParameter("CopiesSold");
-        String amtStock=request.getParameter("AmtInStock");
-
         String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
         String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli"; 
         String mysUserID = "jiajli"; 
         String mysPassword = "cse305QuickSilver";
         
-        String profId = ""+session.getAttribute("login");
+        String profId = ""+session.getValue("login");
             java.sql.Connection conn=null;
             try 
             {
@@ -235,26 +227,33 @@
             
                         java.sql.Statement stmt1=conn.createStatement();
         
-                    java.sql.ResultSet rs = stmt1.executeQuery("select * from Item");
+                    java.sql.ResultSet rs = stmt1.executeQuery("SELECT P.FirstName, I.ItemName, I.ItemID, I.ItemType, A.EmployeeID, B.BidAmt,L.AuctionID"
+                    		+ " FROM Person P,Customer C,Item I,Bidon B, Auction A, List L"
+                    		+ " WHERE P.ID = C.CustomerID "
+                    		+ " AND C.CustomerID = L.SellerID" 
+                    		+ " AND L.AuctionID = A.AuctionID" 
+                    		+ " AND A.Status = 'CLOSED'" 
+                    		+ " AND L.AuctionID = B.AuctionID" 
+                    		+ " AND I.ItemID = A.ItemID" 
+                    		+ " AND B.BidAmt >= (SELECT MAX(B1.BidAmt) FROM Bidon B1)");
           while(rs.next())
             {
 %>
                     <tr>
-                      <td style="width: 84px">
+                      <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(1)%></span></td>
-                      <td style="width: 187px">
+                      <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
-                    <td style="width: 74px">
+                      <td style="width: 74px">
                             <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-                        <td style="width: 74px">
+                      <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
                       <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
                       <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>
+                          <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>   
                       <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>
-                                
+                          <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>                                                             
                     </tr>
 <%              
             }

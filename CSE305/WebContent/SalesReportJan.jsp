@@ -190,37 +190,33 @@
         </nav>
 
         <div id="page-wrapper">
-            <h2>Items</h2>
+            <h2>January Sales Report</h2>
             <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ItemID</th>
-                                            <th>Item Name</th>
-                                            <th>Item Type</th>
-                                            <th>Description</th>
-                                            <th>Year Manufactured</th>
-                                            <th>Copies Sold</th>
-                                            <th>Amount in Stock</th>
+                                            <th>Auction ID</th>
+                                            <th>Bidder ID</th>
+                                            <th>Seller ID</th>
+                                            <th>Selling Price</th>
+                                            <th>Closing Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-        String itemId=request.getParameter("ItemID");
-        String itemName=request.getParameter("ItemName");
-        String itemType=request.getParameter("ItemType");
-        String descr=request.getParameter("Description");
-        String yearManu=request.getParameter("YearManu");
-        String copiesSold=request.getParameter("CopiesSold");
-        String amtStock=request.getParameter("AmtInStock");
+        String auctionID=request.getParameter("AuctionID");
+        String bidderID=request.getParameter("BidderID");
+        String sellerID=request.getParameter("SellerID");
+        String bidAMt=request.getParameter("BidAmt");
+        String closingDate=request.getParameter("ClosingDate");
 
         String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
         String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli"; 
         String mysUserID = "jiajli"; 
         String mysPassword = "cse305QuickSilver";
         
-        String profId = ""+session.getAttribute("login");
+        String profId = ""+session.getValue("login");
             java.sql.Connection conn=null;
             try 
             {
@@ -235,7 +231,7 @@
             
                         java.sql.Statement stmt1=conn.createStatement();
         
-                    java.sql.ResultSet rs = stmt1.executeQuery("select * from Item");
+                    java.sql.ResultSet rs = stmt1.executeQuery("select A.AuctionID, B.BidderID, L.SellerID, B.BidAmt, L.ClosingDate from Auction A, Bidon B, List L Where A.AuctionID = 1 AND L.AuctionID = 1 AND B.AuctionID = 1 AND B.BidderID = (select B1.BidderID FROM Bidon B1 WHERE B1.AuctionID = 1 and B1.BidAMt >= (Select MAX(B2.BidAmt) FROM Bidon B2 Where B2.AuctionID = 1)) AND B.BidAmt >= (SELECT MAX(B1.BidAmt) FROM Bidon B1 WHERE B1.AuctionID = 1) AND L.ClosingDate >= '2008-12-01 00:00:00' and L.ClosingDate <= '2008-12-31:23:59:59'");
           while(rs.next())
             {
 %>
@@ -249,12 +245,7 @@
                         <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
                       <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>
-                                
+                          <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>                                
                     </tr>
 <%              
             }

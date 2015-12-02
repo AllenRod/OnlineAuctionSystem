@@ -81,6 +81,11 @@
 			}
 			out.print("Inserted new customer with ID " + id);
 			stmt1.close();
+			if (session.getAttribute("login") != null) {
+				response.sendRedirect("EmployeeHome.jsp");
+			} else {
+				response.sendRedirect("index.htm");
+			}
 		} else if (role.equals("employee")) {
 			String ssn = request.getParameter("ssn");
 			String startDateStr = request.getParameter("startDate");
@@ -91,6 +96,11 @@
 					+ hourlyRate + "','" + level + "')");
 			out.print("Inserted new employee with ID " + id + " with level " + level);
 			stmt1.close();
+			if (session.getAttribute("login") != null) {
+				response.sendRedirect("index.htm");
+			} else {
+				response.sendRedirect("index.htm");
+			}
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

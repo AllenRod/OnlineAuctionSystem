@@ -190,37 +190,28 @@
         </nav>
 
         <div id="page-wrapper">
-            <h2>Items</h2>
+            <h2>Best Sellers List</h2>
             <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>ItemID</th>
+                                            <th>Item ID</th>
                                             <th>Item Name</th>
                                             <th>Item Type</th>
-                                            <th>Description</th>
-                                            <th>Year Manufactured</th>
                                             <th>Copies Sold</th>
-                                            <th>Amount in Stock</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%
-        String itemId=request.getParameter("ItemID");
-        String itemName=request.getParameter("ItemName");
-        String itemType=request.getParameter("ItemType");
-        String descr=request.getParameter("Description");
-        String yearManu=request.getParameter("YearManu");
-        String copiesSold=request.getParameter("CopiesSold");
-        String amtStock=request.getParameter("AmtInStock");
+
 
         String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
         String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli"; 
         String mysUserID = "jiajli"; 
         String mysPassword = "cse305QuickSilver";
         
-        String profId = ""+session.getAttribute("login");
+        String profId = ""+session.getValue("login");
             java.sql.Connection conn=null;
             try 
             {
@@ -235,26 +226,20 @@
             
                         java.sql.Statement stmt1=conn.createStatement();
         
-                    java.sql.ResultSet rs = stmt1.executeQuery("select * from Item");
+                    java.sql.ResultSet rs = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.CopiesSold FROM Item I ORDER BY CopiesSOld DESC LIMIT 10");
           while(rs.next())
             {
 %>
                     <tr>
-                      <td style="width: 84px">
+                      <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(1)%></span></td>
-                      <td style="width: 187px">
+                      <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
-                    <td style="width: 74px">
-                            <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-                        <td style="width: 74px">
+                      <td style="width: 74px">
+                          <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
+                      <td style="width: 74px">
                           <span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>
-                                
+                              
                     </tr>
 <%              
             }

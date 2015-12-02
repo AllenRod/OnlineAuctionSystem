@@ -57,8 +57,8 @@
 
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">${firstName} ${lastName}<i class="fa fa-user fa-fw"></i> <i
-						class="fa fa-caret-down"></i>
+					data-toggle="dropdown" href="#">${firstName} ${lastName}<i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
@@ -104,91 +104,93 @@
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
 				</div>
-				
+
 				<!-- /.sidebar-collapse -->
 			</div>
-			
+
 			<!-- /.navbar-static-side -->
 		</nav>
 
 		<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header">Current Bids</h3>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>Auction ID</th>
-                                            <th>Item Name</th>
-                                            <th>Current Bid</th>
-                                            <th>End Time</th>
-                                        </tr>
-                                    </thead>
-<%
-	String mysJDBCDriver = "com.mysql.jdbc.Driver";
-	String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
-	String mysUserID = "jiajli";
-	String mysPassword = "cse305QuickSilver";
-	String userID = ""+session.getValue("login");
-	java.sql.Connection conn=null;
-	try 
-	{
-    	Class.forName(mysJDBCDriver).newInstance();
-		java.util.Properties sysprops=System.getProperties();
-		sysprops.put("user",mysUserID);
-		sysprops.put("password",mysPassword);
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">Current Bids</h3>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Auction ID</th>
+									<th>Item Name</th>
+									<th>Current Bid</th>
+									<th>End Time</th>
+								</tr>
+							</thead>
+							<%
+								String mysJDBCDriver = "com.mysql.jdbc.Driver";
+								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
+								String mysUserID = "jiajli";
+								String mysPassword = "cse305QuickSilver";
+								String userID = "" + session.getAttribute("login");
+								java.sql.Connection conn = null;
+								try {
+									Class.forName(mysJDBCDriver).newInstance();
+									java.util.Properties sysprops = System.getProperties();
+									sysprops.put("user", mysUserID);
+									sysprops.put("password", mysPassword);
 
-		//connect to the database
-    	conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
-    	System.out.println("Connected successfully to database using JConnect");
-    
-    	java.sql.Statement stmt1=conn.createStatement();
+									//connect to the database
+									conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
+									System.out
+											.println("Connected successfully to database using JConnect");
 
-		java.sql.ResultSet rs = stmt1.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemName, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"+userID+"' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID");
-	       	  
-	  while(rs.next()) {
-%>
-          <tr>
-              <td style="width: 84px">
-                  <span style="font-size: 10pt"><%=rs.getString(1)%></span>
-              </td>
-              <td style="width: 187px">
-                  <span style="font-size: 10pt"><%=rs.getString(2)%></span>
-              </td>
-              <td style="width: 74px">
-                  <span style="font-size: 10pt"><%=rs.getString(3)%></span>
-              </td>
-              <td>
-                  <span style="font-size: 10pt"><%=rs.getString(4)%></span>
-              </td>
-          </tr>
-<%      		
-	}
-		} catch(Exception e)
-	{
-		e.printStackTrace();
-		out.print(e.toString());
-	}
-	finally{
-	
-		try{conn.close();}catch(Exception ee){};
-	}
+									java.sql.Statement stmt1 = conn.createStatement();
 
-%>              
-                        </table>
-                        <!-- /.table-responsive -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+									java.sql.ResultSet rs = stmt1
+											.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemName, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
+													+ userID
+													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID");
+
+									while (rs.next()) {
+							%>
+							<tr>
+								<td style="width: 84px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
+								</td>
+								<td style="width: 187px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
+								</td>
+								<td style="width: 74px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
+								</td>
+								<td><span style="font-size: 10pt"><%=rs.getString(4)%></span>
+								</td>
+							</tr>
+							<%
+								}
+								} catch (Exception e) {
+									e.printStackTrace();
+									out.print(e.toString());
+								} finally {
+
+									try {
+										conn.close();
+									} catch (Exception ee) {
+									}
+									;
+								}
+							%>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+		</div>
 	</div>
 	<!-- /#wrapper -->
 

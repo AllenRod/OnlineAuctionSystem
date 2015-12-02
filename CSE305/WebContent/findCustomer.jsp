@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Representative Home Page - OAS</title>
+<title>Customer Representative Customer Management - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -102,48 +103,67 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<h2>Personal Information</h2>
-			<form name="myForm" action="editInfo.jsp" method="post">
-				<input type="hidden" name="level" value="${level}" />
-				<div class="form-group">
-					<label>ID</label> <input class="form-control" name="id"
-						value="${id}" readonly />
+			<h2>Customer Management</h2>
+			<div>
+				<form name="myForm" action="E_customer.jsp" method="post">
+					<div class="form-control">
+						<label>Search Customer:</label> <input type="number"
+							name="customerNum" required />
+					</div>
+					<div>
+						<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</form>
+			</div>
+			<c:if test="${not empty returnVal and returnVal ne ''}">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="alert alert-danger">${returnVal}</div>
+					</div>
 				</div>
-				<div class="form-group">
-					<label>First Name</label> <input class="form-control"
-						name="firstName" value="${firstName}" required />
-				</div>
-				<div class="form-group">
-					<label>Last Name</label> <input class="form-control"
-						name="lastName" value="${lastName}" required />
-				</div>
-				<div class="form-group">
-					<label>Social Security Number</label> <input class="form-control"
-						name="ssn" value="${ssn}" type="number" max="999999999" required />
-				</div>
-				<div class="form-group">
-					<label>Address</label> <input class="form-control" name="address"
-						value="${address}" />
-				</div>
-				<div class="form-group">
-					<label>City</label> <input class="form-control" name="city"
-						value="${city}" />
-				</div>
-				<div class="form-group">
-					<label>State</label> <input class="form-control" name="state"
-						type="text" maxlength="2" value="${state}" />
-				</div>
-				<div class="form-group">
-					<label>Zip Code</label> <input class="form-control" name="zipcode"
-						type="number" max="99999" value="${zipcode}" />
-				</div>
-				<div class="form-group">
-					<label>Telephone</label> <input class="form-control"
-						name="telephone" value="${telephone}" type="number"
-						max="9999999999" />
-				</div>
-				<button type="submit" class="btn btn-primary">Edit</button>
-			</form>
+			</c:if>
+			<div class="row">
+				<table class="table table-striped">
+					<tr>
+						<th>Customer ID</th>
+						<th>Name</th>
+						<th>Full Address</th>
+						<th>Telephone</th>
+						<th>CreditCardNum</th>
+						<th>Buyer Rating</th>
+						<th>Seller Rating</th>
+						<th>Item Sold</th>
+						<th>Item Purchase</th>
+						<th>Email</th>
+					</tr>
+					<c:if test="${not empty customerID and customerID ne ''}">
+						<tr>
+							<td>${customerID}</td>
+							<td><c:out value="${cfirstName} ${clastName}" /></td>
+							<td><c:out value="${caddress} ${ccity} ${cstate} ${czip}" /></td>
+							<td>${ctel}</td>
+							<td>${ccn}</td>
+							<td>${buyerRating}</td>
+							<td>${sellerRating}</td>
+							<td>${itemSold}</td>
+							<td>${itemPurchase}</td>
+							<td>${email}</td>
+						</tr>
+						<tr>
+							<th>
+								<form action="editCustForm.jsp" method="post">
+									<button class="btn btn-primary" type="submit">Edit</button>
+								</form>
+							</th>
+							<th>
+							<form action="delCust.jsp" method="post">
+								<button class="btn btn-danger" type="submit">Delete</button>
+							</form>
+							</th>
+						</tr>
+					</c:if>
+				</table>
+			</div>
 		</div>
 		<!-- /#page-wrapper -->
 
