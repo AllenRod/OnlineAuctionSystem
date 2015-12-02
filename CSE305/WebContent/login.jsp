@@ -48,6 +48,18 @@
 					String lastName = rs.getNString("LastName");
 					session.setAttribute("firstName", firstName);
 					session.setAttribute("lastName", lastName);
+					session.setAttribute("id", rs.getInt("ID"));
+					session.setAttribute("email", rs.getNString("Email"));
+					session.setAttribute("address", rs.getNString("Address"));
+					session.setAttribute("city", rs.getNString("City"));
+					session.setAttribute("state", rs.getNString("State"));
+					session.setAttribute("zipcode", rs.getInt("ZipCode"));
+					session.setAttribute("ccn", rs.getLong("CreditCardNum"));
+					session.setAttribute("buyerRating", rs.getInt("BuyerRating"));
+					session.setAttribute("sellerRating", rs.getInt("SellerRating"));
+					session.setAttribute("sold", rs.getInt("ItemSold"));
+					session.setAttribute("purchased", rs.getInt("ItemPurchased"));
+					session.setAttribute("telephone", rs.getLong("Telephone"));
 					response.sendRedirect("CustomerHome.jsp");
 					System.out.println("Login as customer "
 							+ rs.getNString("LastName") + ", "

@@ -51,7 +51,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">OAS Customer Homepage</a>
+				<a class="navbar-brand" href="CustomerHome.jsp">Online Auction System</a>
 			</div>
 			<!-- /.navbar-header -->
 
@@ -75,33 +75,16 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+						<li><a href="CustomerInformation.jsp"><i class="fa fa-user fa-fw"></i>
 								Personal Information</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Employees</a></li>
-						<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
-								Items</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-								Forms</a></li>
-						<li><a href="#"><i class="fa fa-wrench fa-fw"></i> Sales
-								By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="panels-wells.html">Item Name</a></li>
-								<li><a href="buttons.html">Customer Name</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-sitemap fa-fw"></i>
-								Summary Revenue By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="#">Item</a></li>
-								<li><a href="#">Item Type</a></li>
-								<li><a href="#">Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-files-o fa-fw"></i>
-								Highest Total Revenue By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="blank.html">Customer Representative</a></li>
-								<li><a href="login.html">Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
+						<li><a href="index.html"><i class="fa fa-search fa-fw"></i>
+								Browse All Listings</a></li>
+						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
+								Search for Sellers</a></li>
+						<li><a href="forms.html"><i class="fa fa-usd fa-fw"></i>
+								Purchase History</a></li>
+						<li><a href="forms.html"><i class="fa fa-bullhorn fa-fw"></i>
+								Listing History</a></li>
 					</ul>
 				</div>
 
@@ -114,7 +97,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header">Current Bids</h3>
+					<h3 class="page-header">All Bids</h3>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -127,7 +110,9 @@
 							<thead>
 								<tr>
 									<th>Auction ID</th>
+									<th>Item ID</th>
 									<th>Item Name</th>
+									<th>Item Type</th>
 									<th>Current Bid</th>
 									<th>End Time</th>
 								</tr>
@@ -153,20 +138,109 @@
 									java.sql.Statement stmt1 = conn.createStatement();
 
 									java.sql.ResultSet rs = stmt1
-											.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemName, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
+											.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemID, Item.ItemName, Item.ItemType, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
 													+ userID
 													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID");
 
 									while (rs.next()) {
 							%>
 							<tr>
-								<td style="width: 84px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
 								</td>
-								<td style="width: 187px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
 								</td>
-								<td style="width: 74px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
 								</td>
-								<td><span style="font-size: 10pt"><%=rs.getString(4)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
+								</td>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								</td>
+								<td><span style="font-size: 10pt"><%=rs.getString(6)%></span>
+								</td>
+							</tr>
+							<%
+								}
+								} catch (Exception e) {
+									e.printStackTrace();
+									out.print(e.toString());
+								} finally {
+
+									try {
+										conn.close();
+									} catch (Exception ee) {
+									}
+									;
+								}
+							%>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">Listings you might be interested in</h3>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Auction ID</th>
+									<th>Item ID</th>
+									<th>Item Name</th>
+									<th>Item Type</th>
+									<th>Current Bid</th>
+									<th>End Time</th>
+								</tr>
+							</thead>
+							<%
+								try {
+									Class.forName(mysJDBCDriver).newInstance();
+									java.util.Properties sysprops = System.getProperties();
+									sysprops.put("user", mysUserID);
+									sysprops.put("password", mysPassword);
+
+									//connect to the database
+									conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
+									System.out.println("Connected successfully to database using JConnect");
+
+									java.sql.Statement stmt1 = conn.createStatement();
+
+									java.sql.ResultSet rs1 = stmt1
+											.executeQuery("CREATE VIEW BuyerHistory(ItemID, ItemName, ItemType, Num) AS "
+													+ "SELECT I.ItemID, I.ItemName, I.ItemType, COUNT(DISTINCT A.AuctionID) AS ItemCount "
+													+ "FROM Item I, Bidon B, Auction A " 
+													+ "WHERE B.AuctionID = A.AuctionID AND A.Status='CLOSED' AND A.ItemID = I.ItemID AND B.BidderID ="
+													+ userID
+													+ " AND B.BidderID = (SELECT BidderID FROM Bidon WHERE BidAmt >= (SELECT MAX(B2.BidAmt) FROM Bidon B2))"
+													+ " GROUP BY I.ItemID, I.ItemName, I.ItemType ORDER BY ItemCount DESC;");
+									java.sql.ResultSet rs2 = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description" 
+													+ " FROM Item I, BuyerHistory H WHERE I.ItemType = H.ItemType AND I.ItemID <> H.ItemID"
+													+ " ORDER BY I.AmtInStock DESC LIMIT 5;");
+									while (rs2.next()) {
+							%>
+							<tr>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(1)%></span>
+								</td>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(2)%></span>
+								</td>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(3)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(4)%></span>
+								</td>
+								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(5)%></span>
+								</td>
+								<td><span style="font-size: 10pt"><%=rs2.getString(6)%></span>
 								</td>
 							</tr>
 							<%

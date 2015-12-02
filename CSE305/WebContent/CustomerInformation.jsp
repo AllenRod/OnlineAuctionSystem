@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Representative Home Page - OAS</title>
+<title>Customer Profile - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -66,7 +66,7 @@
 								Profile</a></li>
 						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
 						<li class="divider"></li>
-						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+						<li><a href="index.htm"><i class="fa fa-sign-out fa-fw"></i>
 								Logout</a></li>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
@@ -76,34 +76,16 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
+						<li><a href="CustomerInformation.jsp"><i class="fa fa-dashboard fa-fw"></i>
+								Personal Information</a></li>
 						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Manager Info</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Employees</a></li>
-
-						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
-								Users</a></li>
+								Browse All Listings</a></li>
+						<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
+								Search for Sellers</a></li>
 						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-								Forms</a></li>
-						<li><a href="#"><i class="fa fa-users fa-fw"></i>
-								Customers<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="newCustomer.html">New Customer</a></li>
-								<li><a href="buttons.html">Find Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-sitemap fa-fw"></i>
-								Summary Revenue By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="#">Item</a></li>
-								<li><a href="#">Item Type</a></li>
-								<li><a href="#">Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-files-o fa-fw"></i>
-								Highest Total Revenue By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="blank.html">Customer Representative</a></li>
-								<li><a href="login.html">Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
+								Purchase History</a></li>
+						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
+								Listing History</a></li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -113,11 +95,14 @@
 
 		<div id="page-wrapper">
 			<h2>Personal Information</h2>
-			<form name="myForm" action="editInfo.jsp" method="post">
-				<input type="hidden" name="level" value="${level}"/>
+			<form name="myForm" action="editCustInfo.jsp" method="post">
 				<div class="form-group">
 					<label>ID</label> <input class="form-control"
 						name="id" value="${id}" readonly />
+				</div>
+				<div class="form-group">
+					<label>Email Address</label> <input class="form-control"
+						name="email" value="${email}" type="email" required/>
 				</div>
 				<div class="form-group">
 					<label>First Name</label> <input class="form-control"
@@ -126,10 +111,6 @@
 				<div class="form-group">
 					<label>Last Name</label> <input class="form-control"
 						name="lastName" value="${lastName}" required />
-				</div>
-				<div class="form-group">
-					<label>Social Security Number</label> <input class="form-control"
-						name="ssn" value="${ssn}" type="number" max="999999999" required/>
 				</div>
 				<div class="form-group">
 					<label>Address</label> <input class="form-control"

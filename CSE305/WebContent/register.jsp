@@ -73,8 +73,8 @@
 		if (role.equals("customer")) {
 			String ccnStr = request.getParameter("ccn");
 			String email = request.getParameter("email");
-			stmt1.executeUpdate("INSERT INTO Customer(CustomerID, Email) VALUES('"
-					+ id + "','" + email + "')");
+			stmt1.executeUpdate("INSERT INTO Customer(CustomerID, BuyerRating, SellerRating, ItemSold, ItemPurchased, Email) VALUES('"
+					+ id + "','1','1','0','0','" + email + "')");
 			if (!ccnStr.equals("")) {
 				stmt1.executeUpdate("UPDATE Customer SET CreditCardNum='"
 						+ ccnStr + "' WHERE CustomerID=" + id);
