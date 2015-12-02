@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,8 +77,8 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="EmployeeHome.jsp"><i class="fa fa-home fa-fw"></i>
-								Home</a></li>
+						<li><a href="EmployeeHome.jsp"><i
+								class="fa fa-home fa-fw"></i>Home</a></li>
 						<li><a href="saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
 								Record Sale</a></li>
 						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
@@ -114,48 +115,21 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<h2>Personal Information</h2>
-			<form name="myForm" action="editInfo.jsp" method="post">
-				<input type="hidden" name="level" value="${level}" />
-				<div class="form-group">
-					<label>ID</label> <input class="form-control" name="id"
-						value="${id}" readonly />
+			<h2>Sales Record</h2>
+			<form name="myForm" action="E_record.jsp" method="post">
+				<div class="form-control">
+					<label>Search Auction:</label> <input type="number"
+						name="auctionNum" required />
 				</div>
-				<div class="form-group">
-					<label>First Name</label> <input class="form-control"
-						name="firstName" value="${firstName}" required />
-				</div>
-				<div class="form-group">
-					<label>Last Name</label> <input class="form-control"
-						name="lastName" value="${lastName}" required />
-				</div>
-				<div class="form-group">
-					<label>Social Security Number</label> <input class="form-control"
-						name="ssn" value="${ssn}" type="number" max="999999999" required />
-				</div>
-				<div class="form-group">
-					<label>Address</label> <input class="form-control" name="address"
-						value="${address}" />
-				</div>
-				<div class="form-group">
-					<label>City</label> <input class="form-control" name="city"
-						value="${city}" />
-				</div>
-				<div class="form-group">
-					<label>State</label> <input class="form-control" name="state"
-						type="text" maxlength="2" value="${state}" />
-				</div>
-				<div class="form-group">
-					<label>Zip Code</label> <input class="form-control" name="zipcode"
-						type="number" max="99999" value="${zipcode}" />
-				</div>
-				<div class="form-group">
-					<label>Telephone</label> <input class="form-control"
-						name="telephone" value="${telephone}" type="number"
-						max="9999999999" />
-				</div>
-				<button type="submit" class="btn btn-primary">Edit</button>
+				<button type="submit" class="btn btn-primary">Search</button>
 			</form>
+			<c:if test="${returnVal ne ''}">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="alert alert-danger">${returnVal}</div>
+					</div>
+				</div>
+			</c:if>
 		</div>
 		<!-- /#page-wrapper -->
 
