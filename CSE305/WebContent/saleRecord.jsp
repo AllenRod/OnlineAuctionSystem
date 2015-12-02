@@ -116,20 +116,50 @@
 
 		<div id="page-wrapper">
 			<h2>Sales Record</h2>
-			<form name="myForm" action="E_record.jsp" method="post">
-				<div class="form-control">
-					<label>Search Auction:</label> <input type="number"
-						name="auctionNum" required />
-				</div>
-				<button type="submit" class="btn btn-primary">Search</button>
-			</form>
-			<c:if test="${returnVal ne ''}">
+			<div>
+				<form name="myForm" action="E_record.jsp" method="post">
+					<div class="form-control">
+						<label>Search Auction:</label> <input type="number"
+							name="auctionNum" required />
+					</div>
+					<div>
+						<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</form>
+			</div>
+			<c:if test="${not empty returnVal and returnVal ne ''}">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="alert alert-danger">${returnVal}</div>
 					</div>
 				</div>
 			</c:if>
+			<div class="row">
+				<table class="table table-striped">
+					<tr>
+						<th>Auction ID</th>
+						<th>Item ID</th>
+						<th>Item Name</th>
+						<th>Buyer ID</th>
+						<th>Buyer Name</th>
+						<th>Seller ID</th>
+						<th>Price</th>
+						<th>Transaction Date</th>
+					</tr>
+					<tr>
+						<c:if test="${auctionID ne ''}">
+							<td>${auctionID}</td>
+							<td>${itemID}</td>
+							<td>${itemName}</td>
+							<td>${buyerID}</td>
+							<td>${buyerName}</td>
+							<td>${sellerID}</td>
+							<td>${paidAmt}</td>
+							<td>${close}</td>
+						</c:if>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<!-- /#page-wrapper -->
 

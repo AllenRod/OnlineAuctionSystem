@@ -220,7 +220,7 @@
         String mysUserID = "jiajli"; 
         String mysPassword = "cse305QuickSilver";
         
-        String profId = ""+session.getValue("login");
+        String profId = ""+session.getAttribute("login");
             java.sql.Connection conn=null;
             try 
             {
