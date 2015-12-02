@@ -44,7 +44,11 @@
 				if (rs.next()) {
 					// login success
 					session.setAttribute("login", username);
-					//response.sendRedirect("StudentInformation.jsp");
+					String firstName = rs.getNString("FirstName");
+					String lastName = rs.getNString("LastName");
+					session.setAttribute("firstName", firstName);
+					session.setAttribute("lastName", lastName);
+					response.sendRedirect("CustomerHome.jsp");
 					System.out.println("Login as customer "
 							+ rs.getNString("LastName") + ", "
 							+ rs.getNString("FirstName"));
