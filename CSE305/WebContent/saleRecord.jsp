@@ -77,36 +77,24 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="EmployeeHome.jsp"><i
-								class="fa fa-home fa-fw"></i>Home</a></li>
+						<li><a href="EmployeeHome.jsp"><i class="fa fa-home fa-fw"></i>
+								Home</a></li>
 						<li><a href="saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
 								Record Sale</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
-								Employees</a></li>
-
-						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
-								Users</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-								Forms</a></li>
+						<li><a href="E_mailList.jsp"><i class="fa fa-envelope fa-fw"></i>
+								Mailing List</a></li>
+						<li><a href="#"><i class="fa fa-th-list fa-fw"></i>
+								Item Suggestions</a></li>
+						<li><a href="#"><i class="fa fa-file-text fa-fw"></i>
+								Receipt</a></li>	
 						<li><a href="#"><i class="fa fa-users fa-fw"></i>
 								Customers<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="CustomerRegistration.htm">New Customer</a></li>
 								<li><a href="findCustomer.jsp">Find Customer</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-sitemap fa-fw"></i>
-								Summary Revenue By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="#">Item</a></li>
-								<li><a href="#">Item Type</a></li>
-								<li><a href="#">Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-files-o fa-fw"></i>
-								Highest Total Revenue By<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="blank.html">Customer Representative</a></li>
-								<li><a href="login.html">Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
+						<li><a href="E_allEmp.jsp"><i class="fa fa-users fa-fw"></i>
+								Employee Info</a></li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
