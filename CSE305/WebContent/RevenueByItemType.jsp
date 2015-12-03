@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,7 +66,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="index.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -190,92 +191,42 @@
         </nav>
 
         <div id="page-wrapper">
-            <h2>Sales By Customer Name</h2>
-            <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                        	<th>First Name</th>
-                                            <th>Item Name</th>
-                                            <th>Item ID</th>
-                                            <th>Item Type</th>
-                                            <th>Employee ID</th>
-                                            <th>Bid Amount</th>
-                                            <th>Auction ID</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <%
-        String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
-        String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli"; 
-        String mysUserID = "jiajli"; 
-        String mysPassword = "cse305QuickSilver";
-        
-        String profId = ""+session.getValue("login");
-            java.sql.Connection conn=null;
-            try 
-            {
-                Class.forName(mysJDBCDriver).newInstance();
-                java.util.Properties sysprops=System.getProperties();
-                sysprops.put("user",mysUserID);
-                sysprops.put("password",mysPassword);
-        
-                //connect to the database
-                        conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
-                        System.out.println("Connected successfully to database using JConnect");
-            
-                        java.sql.Statement stmt1=conn.createStatement();
-        
-                    java.sql.ResultSet rs = stmt1.executeQuery("SELECT P.FirstName, I.ItemName, I.ItemID, I.ItemType, A.EmployeeID, B.BidAmt,L.AuctionID"
-                    		+ " FROM Person P,Customer C,Item I,Bidon B, Auction A, List L"
-                    		+ " WHERE P.ID = C.CustomerID "
-                    		+ " AND C.CustomerID = L.SellerID" 
-                    		+ " AND L.AuctionID = A.AuctionID" 
-                    		+ " AND A.Status = 'CLOSED'" 
-                    		+ " AND L.AuctionID = B.AuctionID" 
-                    		+ " AND I.ItemID = A.ItemID" 
-                    		+ " AND B.BidAmt >= (SELECT MAX(B1.BidAmt) FROM Bidon B1)"
-                    		+ "GROUP BY FirstName");
-          while(rs.next())
-            {
-%>
-                    <tr>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(1)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
-                      <td style="width: 74px">
-                            <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>   
-                      <td style="width: 74px">
-                          <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>                                                             
-                    </tr>
-<%              
-            }
-            } catch(Exception e)
-            {
-                e.printStackTrace();
-                out.print(e.toString());
-            }
-            finally{
-            
-                try{conn.close();}catch(Exception ee){};
-            }
-
-  %>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-        </div>
-        <!-- /#page-wrapper -->
+			<h2>Revenue By Item Type</h2>
+			<div>
+				<form name="myForm" action="M_itemTypeSearch.jsp" method="post">
+					<div class="form-control">
+						<label>Search Item Types:</label> <input type="text"
+							name="itemType" required />
+					</div>
+					<div>
+						<button type="submit" class="btn btn-primary">Search</button>
+					</div>
+				</form>
+			</div>
+			<c:if test="${not empty returnVal and returnVal ne ''}">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="alert alert-danger">${returnVal}</div>
+					</div>
+				</div>
+			</c:if>
+			<div class="row">
+				<table class="table table-striped">
+					<tr>
+						<th>Item Type</th>
+						<th>Revenue Generated</th>
+						
+					</tr>
+					<c:if test="${not empty itemType and itemType ne ''}">
+						<tr>
+							<td>${itemType}</td>
+							<td>${revenueGenerated}</td>
+						</tr>
+					</c:if>
+				</table>
+			</div>
+		</div>
+		<!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
