@@ -268,7 +268,8 @@
 								</td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
 								</td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								<td style="width: 150px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								</td>
 							</tr>
 							<%
 								}
@@ -318,7 +319,8 @@
 								</td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
 								</td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								<td style="width: 150px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								</td>
 							</tr>
 							<%
 								}

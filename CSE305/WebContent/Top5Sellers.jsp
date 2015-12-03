@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>All Customers - OAS</title>
+<title>Top 5 Sellers - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -43,7 +43,7 @@
 		javascript: myForm.submit();
 	}
 	function Button2_onclick() {
-	    window.open("Top5Sellers.jsp","_self");
+	    window.open("AllCustomers.jsp","_self");
 	}
 </script>
 </head>
@@ -119,13 +119,13 @@
 								placeholder="Enter user ID" />
 							<button type="submit" id="userSearchButton"
 								onclick="return Button1_onclick()">Search</button>
-							<button type="button" id="bestSellers"
-								onclick="return Button2_onclick()">Our Top 5 Sellers</button>
+							<button type="button" id="goBack"
+								onclick="return Button2_onclick()">Go Back To All Users</button>
 						</div>
 					</fieldset>
 				</form>
 			</div>
-			<h2>All Users</h2>
+			<h2>Top 5 Sellers with Highest Rating</h2>
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover">
@@ -134,8 +134,6 @@
 								<th>Customer ID</th>
 								<th>Items Sold</th>
 								<th>Seller Rating</th>
-								<th>Items Purchased</th>
-								<th>Buyer Rating</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -161,7 +159,8 @@
 									java.sql.Statement stmt1 = conn.createStatement();
 
 									java.sql.ResultSet rs = stmt1
-											.executeQuery("SELECT C.CustomerID, C.ItemSold, C.SellerRating, C.ItemPurchased, C.BuyerRating FROM Customer C");
+											.executeQuery("SELECT DISTINCT C.CustomerID, C.ItemSold, C.SellerRating FROM Customer C, List L"
+													+" WHERE C.CustomerID = L.SellerID ORDER BY C.SellerRating DESC LIMIT 5");
 									while (rs.next()) {
 							%>
 							<tr>
@@ -175,8 +174,6 @@
 								</form>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
 							</tr>
 							<%
 								}
