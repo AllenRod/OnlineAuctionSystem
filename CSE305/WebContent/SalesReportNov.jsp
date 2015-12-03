@@ -231,7 +231,7 @@
             
                         java.sql.Statement stmt1=conn.createStatement();
         
-                    java.sql.ResultSet rs = stmt1.executeQuery("select A.AuctionID, B.BidderID, L.SellerID, B.BidAmt, L.ClosingDate from Auction A, Bidon B, List L Where A.AuctionID = 1 AND L.AuctionID = 1 AND B.AuctionID = 1 AND B.BidderID = (select B1.BidderID FROM Bidon B1 WHERE B1.AuctionID = 1 and B1.BidAMt >= (Select MAX(B2.BidAmt) FROM Bidon B2 Where B2.AuctionID = 1)) AND B.BidAmt >= (SELECT MAX(B1.BidAmt) FROM Bidon B1 WHERE B1.AuctionID = 1) AND L.ClosingDate >= '2008-12-01 00:00:00' and L.ClosingDate <= '2008-12-31:23:59:59'");
+                    java.sql.ResultSet rs = stmt1.executeQuery("select A.AuctionID, B.BidderID, L.SellerID, B.BidAmt, L.ClosingDate from Auction A, Bidon B, List L Where A.AuctionID = 1 AND L.AuctionID = 1 AND B.AuctionID = 1 AND B.BidderID = (select B1.BidderID FROM Bidon B1 WHERE B1.AuctionID = 1 and B1.BidAMt >= (Select MAX(B2.BidAmt) FROM Bidon B2 Where B2.AuctionID = 1)) AND B.BidAmt >= (SELECT MAX(B1.BidAmt) FROM Bidon B1 WHERE B1.AuctionID = 1) AND MONTH(L.ClosingDate) = 11");
           while(rs.next())
             {
 %>
