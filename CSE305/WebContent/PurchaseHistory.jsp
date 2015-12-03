@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page import="java.util.Calendar" %>
 
 <head>
 
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>All Auction Listings - OAS</title>
+    <title>Purchase History - OAS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="template_admin2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -97,110 +98,90 @@
         </nav>
 
         <div id="page-wrapper">
-        	<div class="input-group">
-				<form name="myForm" action=".jsp" method="post" role="form">
-					<fieldset>
-						<div>
-	                        <label style="font-size: 10pt">Search a particular item type </label>
-							<select id="itemType" name="itemType">
-								<option value="" selected></option>
-								<option value="books">Books</option>
-								<option value="electronics">Electronics</option>
-								<option value="apparel">Apparel</option>
-								<option value="car">Car</option>
-								<option value="kitchen">Kitchen</option>
-								<option value="DVD">DVD</option>
-							</select>
-							<label style="font-size: 10pt">   and/or   </label>
-							<input id="keywords" type="text" name="keywords" width="200px" placeholder="using item keywords" />
-                    		<button id="searchButton" onclick="return Button1_onclick()">Search</button>
-						</div>
-					</fieldset>
-				</form>
-				
-            </div>
-            <h2>All Auction Listings</h2>
-            <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                        	<th>Auction ID</th>
-                                        	<th>Seller ID</th>
-                                            <th>Item ID</th>
-                                            <th>Item Name</th>
-                                            <th>Item Type</th>
-                                            <th>Current Price</th>
-                                            <th>Closing Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+            <div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">Prior Purchases:</h3>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Auction ID</th>
+									<th>Item ID</th>
+									<th>Item Name</th>
+									<th>Item Type</th>
+									<th>Price</th>
+									<th>End Time</th>
+								</tr>
+							</thead>
 <%
-        String mysJDBCDriver = "com.mysql.jdbc.Driver"; 
-        String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli"; 
-        String mysUserID = "jiajli"; 
-        String mysPassword = "cse305QuickSilver";
-        
-        String profId = ""+session.getValue("login");
-            java.sql.Connection conn=null;
-            try 
-            {
-                Class.forName(mysJDBCDriver).newInstance();
-                java.util.Properties sysprops=System.getProperties();
-                sysprops.put("user",mysUserID);
-                sysprops.put("password",mysPassword);
-        
-                //connect to the database
-                        conn=java.sql.DriverManager.getConnection(mysURL,sysprops);
-                        System.out.println("Connected successfully to database using JConnect");
-            
-                        java.sql.Statement stmt1=conn.createStatement();
-        
-                    java.sql.ResultSet rs = stmt1.executeQuery("SELECT A.AuctionID, L.SellerID, A.ItemID, I.ItemName, I.ItemType, A.CurrentBid, L.ClosingDate"
-                    		+ " FROM Item I, Auction A, List L"
-                    		+ " WHERE A.ItemID = I.ItemID "
-                    		+ " AND A.AuctionID = L.AuctionID");
-               
-          while(rs.next())
-            {
-%>
-                  <tr>
-                      <td style="width: 80px">
-                          <span style="font-size: 10pt"><%=rs.getString(1)%></span></td>
-                      <td style="width: 80px">
-                          <span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
-                      <td style="width: 80px">
-                          <span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-                      <td style="width: 80px">
-                          <span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-                      <td style="width: 80px">
-                          <span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-                      <td style="width: 80px">
-                          <span style="font-size: 10pt"><%=rs.getString(6)%></span></td>   
-                      <td style="width: 150px">
-                          <span style="font-size: 10pt"><%=rs.getString(7)%></span></td>                                                             
-                  </tr>
-<%              
-            }
-            } catch(Exception e)
-            {
-                e.printStackTrace();
-                out.print(e.toString());
-            }
-            finally{
-            
-                try{conn.close();}catch(Exception ee){};
-            }
+								String mysJDBCDriver = "com.mysql.jdbc.Driver";
+								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
+								String mysUserID = "jiajli";
+								String mysPassword = "cse305QuickSilver";
+								String userID = "" + session.getAttribute("login");
+								Calendar cal = Calendar.getInstance();
+								java.sql.Connection conn = null;
+								try {
+									Class.forName(mysJDBCDriver).newInstance();
+									java.util.Properties sysprops = System.getProperties();
+									sysprops.put("user", mysUserID);
+									sysprops.put("password", mysPassword);
 
-  %>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-        </div>
-        <!-- /#page-wrapper -->
+									//connect to the database
+									conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
+									System.out
+											.println("Connected successfully to database using JConnect");
 
+									java.sql.Statement stmt1 = conn.createStatement();
+
+									java.sql.ResultSet rs = stmt1.executeQuery("SELECT A.AuctionID, A.ItemID, I.ItemName, I.ItemType, A.CurrentBid, L.ClosingDate FROM Auction A, Item I, Bidon B, List L WHERE B.BidderID='"
+													+ userID
+													+ "' and B.BidAmt>=ALL(SELECT B1.BidAmt FROM Bidon B1 WHERE B1.AuctionID=B.AuctionID) and L.AuctionID = A.AuctionID and A.AuctionID = B.AuctionID and A.ItemID = I.ItemID and L.ClosingDate<'"
+													+ cal.getTime()+"'");
+									while (rs.next()) {
+							%>
+							<tr>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								</td>
+								<td style="width: 150px"><span style="font-size: 10pt"><%=rs.getString(6)%></span>
+								</td>
+							</tr>
+							<%
+									}
+								}catch (Exception e) {
+									e.printStackTrace();
+									out.print(e.toString());
+								} finally {
+
+									try {
+										conn.close();
+									} catch (Exception ee) {
+									}
+									;
+								}
+							%>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
     </div>
     <!-- /#wrapper -->
 
