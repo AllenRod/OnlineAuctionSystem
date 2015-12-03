@@ -120,89 +120,97 @@
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<%
-							String mysJDBCDriver = "com.mysql.jdbc.Driver";
-							String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
-							String mysUserID = "jiajli";
-							String mysPassword = "cse305QuickSilver";
+					<form action="auctionBid.jsp" method="post">
+						<input type="hidden" name="bidderID" value="${id}">
+						<div class="panel panel-default">
+							<%
+								String mysJDBCDriver = "com.mysql.jdbc.Driver";
+								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
+								String mysUserID = "jiajli";
+								String mysPassword = "cse305QuickSilver";
 
-							String userID = "" + session.getValue("login");
-							java.sql.Connection conn = null;
-							try {
-								Class.forName(mysJDBCDriver).newInstance();
-								java.util.Properties sysprops = System.getProperties();
-								sysprops.put("user", mysUserID);
-								sysprops.put("password", mysPassword);
+								String userID = "" + session.getAttribute("login");
+								java.sql.Connection conn = null;
+								try {
+									Class.forName(mysJDBCDriver).newInstance();
+									java.util.Properties sysprops = System.getProperties();
+									sysprops.put("user", mysUserID);
+									sysprops.put("password", mysPassword);
 
-								//connect to the database
-								conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
-								System.out
-										.println("Connected successfully to database using JConnect");
+									//connect to the database
+									conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
+									System.out
+											.println("Connected successfully to database using JConnect");
 
-								java.sql.Statement stmt1 = conn.createStatement();
+									java.sql.Statement stmt1 = conn.createStatement();
+									// Update Person table first
+									System.out.println("Bid amount found");
+									java.sql.ResultSet rs = stmt1
+											.executeQuery("SELECT A.AuctionID, L.SellerID, A.ItemID, I.ItemName, I.ItemType, I.Description, I.YearManu, A.OpeningBid, A.CurrentBid, A.Status, A.BidIncrement FROM Item I, Auction A, List L WHERE A.AuctionID='"
+													+ aID + "' and A.ItemID=I.ItemID");
+									if (rs.next()) {
+							%>
+							<div class="panel-heading">
+								<form name="myForm" action="AuctionInformation.jsp"
+									method="post" role="form">
 
-								java.sql.ResultSet rs = stmt1
-										.executeQuery("SELECT A.AuctionID, L.SellerID, A.ItemID, I.ItemName, I.ItemType, I.Description, I.YearManu, A.OpeningBid, A.CurrentBid, A.Status FROM Item I, Auction A, List L WHERE A.AuctionID='"
-												+ aID + "' and A.ItemID=I.ItemID");
-								if (rs.next()) {
-						%>
-						<div class="panel-heading">
-							<form name="myForm" action="AuctionInformation.jsp" method="post"
-								role="form">
-
-								<label>Auction ID: </label> <input type="hidden"
-									value="<%=rs.getString(1)%>" name="aID"> <input
-									type="submit" value="<%=rs.getString(1)%>"
-									onclick="return Button1_onclick()">
-							</form>
+									<label>Auction ID: </label> <input type="hidden"
+										value="<%=rs.getString(1)%>" name="auctionID"> <input
+										type="submit" value="<%=rs.getString(1)%>"
+										onclick="return Button1_onclick()">
+								</form>
+							</div>
+							<div class="panel-heading">
+								<form name="myForm" action="C_OtherCustomer.jsp" method="post"
+									role="form">
+									<label>Seller ID: </label> <input type="hidden"
+										value="<%=rs.getString(2)%>" name="sellerID"> <input
+										type="submit" value="<%=rs.getString(2)%>"
+										onclick="return Button1_onclick()">
+								</form>
+							</div>
+							<div class="panel-heading">
+								<form name="myForm" action="ItemInformation.jsp" method="post"
+									role="form">
+									<label>Item ID: </label> <input type="hidden"
+										value="<%=rs.getString(3)%>" name="itemID"> <input
+										type="submit" value="<%=rs.getString(3)%>"
+										onclick="return Button1_onclick()">
+								</form>
+							</div>
+							<div class="panel-heading">
+								<label>Item Name:</label>
+								<%=rs.getString(4)%>
+							</div>
+							<div class="panel-heading">
+								<label>Item Type:</label>
+								<%=rs.getString(5)%>
+							</div>
+							<div class="panel-footer">
+								<label>Year Manufactured:</label>
+								<%=rs.getString(7)%>
+							</div>
+							<div class="panel-body">
+								<p><%=rs.getString(6)%></p>
+							</div>
+							<div class="panel-footer">
+								<label>Opening Bid:</label>
+								<%=rs.getString(8)%>
+							</div>
+							<div class="panel-footer">
+								<label>Highest Bid:</label>
+								<%=rs.getString(9)%>
+							</div>
+							<div class="panel-footer">
+								<label>Status:</label>
+								<%=rs.getString(10)%>
+							</div>
 						</div>
-						<div class="panel-heading">
-							<form name="myForm" action="C_OtherCustomer.jsp" method="post"
-								role="form">
-								<label>Seller ID: </label> <input type="hidden"
-									value="<%=rs.getString(2)%>" name="cID"> <input
-									type="submit" value="<%=rs.getString(2)%>"
-									onclick="return Button1_onclick()">
-							</form>
-						</div>
-						<div class="panel-heading">
-							<form name="myForm" action="ItemInformation.jsp" method="post"
-								role="form">
-								<label>Item ID: </label> <input type="hidden"
-									value="<%=rs.getString(3)%>" name="aID"> <input
-									type="submit" value="<%=rs.getString(3)%>"
-									onclick="return Button1_onclick()">
-							</form>
-						</div>
-						<div class="panel-heading">
-							<label>Item Name:</label>
-							<%=rs.getString(4)%>
-						</div>
-						<div class="panel-heading">
-							<label>Item Type:</label>
-							<%=rs.getString(5)%>
-						</div>
-						<div class="panel-footer">
-							<label>Year Manufactured:</label>
-							<%=rs.getString(7)%>
-						</div>
-						<div class="panel-body">
-							<p><%=rs.getString(6)%></p>
-						</div>
-						<div class="panel-footer">
-							<label>Opening Bid:</label>
-							<%=rs.getString(8)%>
-						</div>
-						<div class="panel-footer">
-							<label>Highest Bid:</label>
-							<%=rs.getString(9)%>
-						</div>
-						<div class="panel-footer">
-							<label>Status:</label>
-							<%=rs.getString(10)%>
-						</div>
-					</div>
+						
+						<input type="number" step="0.01" name="bidAmt">
+						
+						<button type="submit" class="btn btn-primary">Bid On</button>
+					</form>
 				</div>
 				<%
 					}
@@ -218,15 +226,12 @@
 						;
 					}
 				%>
-				</tbody>
-				</table>
 			</div>
 			<!-- /.table-responsive -->
 		</div>
 	</div>
 	<!-- /#page-wrapper -->
 
-	</div>
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
