@@ -35,7 +35,7 @@
 		System.out.println("Customer successfully deleted");
 		session.setAttribute("customerID", "");
 		stmt1.close();
-		response.sendRedirect("findCustomer.jsp");
+		response.sendRedirect("E_findCustomer.jsp");
 	} catch (Exception e) {
 		e.printStackTrace();
 		out.print(e.toString());
