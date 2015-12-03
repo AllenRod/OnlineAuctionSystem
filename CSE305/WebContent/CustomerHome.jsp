@@ -75,15 +75,17 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="CustomerInformation.jsp"><i class="fa fa-user fa-fw"></i>
+						<li><a href="CustomerHome.jsp"><i class="fa fa-user fa-fw"></i>
+								Customer Homepage</a></li>
+						<li><a href="CustomerInformation.jsp"><i class="fa fa-edit fa-fw"></i>
 								Personal Information</a></li>
-						<li><a href="index.html"><i class="fa fa-search fa-fw"></i>
+						<li><a href="AllListings.jsp"><i class="fa fa-search fa-fw"></i>
 								Browse All Listings</a></li>
-						<li><a href="tables.html"><i class="fa fa-users fa-fw"></i>
-								Search for Sellers</a></li>
-						<li><a href="forms.html"><i class="fa fa-usd fa-fw"></i>
+						<li><a href="AllCustomers.jsp"><i class="fa fa-users fa-fw"></i>
+								Our Sellers/Buyers</a></li>
+						<li><a href="PurchaseHistory.jsp"><i class="fa fa-usd fa-fw"></i>
 								Purchase History</a></li>
-						<li><a href="forms.html"><i class="fa fa-bullhorn fa-fw"></i>
+						<li><a href="ListingHistory.jsp"><i class="fa fa-bullhorn fa-fw"></i>
 								Listing History</a></li>
 					</ul>
 				</div>
@@ -145,17 +147,17 @@
 									while (rs.next()) {
 							%>
 							<tr>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
 								</td>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
 								</td>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
 								</td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
 								</td>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
 								</td>
-								<td><span style="font-size: 10pt"><%=rs.getString(6)%></span>
+								<td style="width: 150px"><span style="font-size: 10pt"><%=rs.getString(6)%></span>
 								</td>
 							</tr>
 							<%
@@ -183,7 +185,7 @@
 			
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header">Listings you might be interested in</h3>
+					<h3 class="page-header">Items you might want to take a look at: </h3>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -195,12 +197,10 @@
 							id="dataTables-example">
 							<thead>
 								<tr>
-									<th>Auction ID</th>
 									<th>Item ID</th>
 									<th>Item Name</th>
 									<th>Item Type</th>
-									<th>Current Bid</th>
-									<th>End Time</th>
+									<th>Item Description</th>
 								</tr>
 							</thead>
 							<%
@@ -216,31 +216,30 @@
 
 									java.sql.Statement stmt1 = conn.createStatement();
 
-									java.sql.ResultSet rs1 = stmt1
-											.executeQuery("CREATE VIEW BuyerHistory(ItemID, ItemName, ItemType, Num) AS "
-													+ "SELECT I.ItemID, I.ItemName, I.ItemType, COUNT(DISTINCT A.AuctionID) AS ItemCount "
-													+ "FROM Item I, Bidon B, Auction A " 
-													+ "WHERE B.AuctionID = A.AuctionID AND A.Status='CLOSED' AND A.ItemID = I.ItemID AND B.BidderID ="
-													+ userID
-													+ " AND B.BidderID = (SELECT BidderID FROM Bidon WHERE BidAmt >= (SELECT MAX(B2.BidAmt) FROM Bidon B2))"
-													+ " GROUP BY I.ItemID, I.ItemName, I.ItemType ORDER BY ItemCount DESC;");
-									java.sql.ResultSet rs2 = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description" 
-													+ " FROM Item I, BuyerHistory H WHERE I.ItemType = H.ItemType AND I.ItemID <> H.ItemID"
-													+ " ORDER BY I.AmtInStock DESC LIMIT 5;");
+									stmt1.executeUpdate("CREATE VIEW BuyingHistory(ItemID, ItemName, ItemType, Num) AS "
+											+ "SELECT I.ItemID, I.ItemName, I.ItemType, COUNT(DISTINCT A.AuctionID) AS ItemCount "
+											+ "FROM Item I, Auction A, Bidon B WHERE A.ItemID = I.ItemID "
+											+ "AND B.BidderID='" + userID
+											+ "' AND B.AuctionID = A.AuctionID AND A.Status='CLOSED' AND "
+											+ "B.BidderID = (SELECT BidderID "
+											+ "FROM Bidon "
+											+ "WHERE BidAmt >= (SELECT MAX(B2.BidAmt) "
+											+ "FROM Bidon B2)) "
+											+ "GROUP BY I.ItemID, I.ItemName, I.ItemType ORDER BY ItemCount DESC;");
+									java.sql.ResultSet rs2 = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description "
+											+ "FROM Item I, BuyingHistory H "
+											+ "WHERE I.ItemType = H.ItemType AND I.ItemID <> H.ItemID "
+											+ "ORDER BY I.AmtInStock DESC LIMIT 5;");
 									while (rs2.next()) {
 							%>
 							<tr>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(1)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(1)%></span>
 								</td>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(2)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(2)%></span>
 								</td>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(3)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(3)%></span>
 								</td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(4)%></span>
-								</td>
-								<td style="width: 100px"><span style="font-size: 10pt"><%=rs2.getString(5)%></span>
-								</td>
-								<td><span style="font-size: 10pt"><%=rs2.getString(6)%></span>
+								<td style="width: 150px"><span style="font-size: 10pt"><%=rs2.getString(4)%></span>
 								</td>
 							</tr>
 							<%
@@ -251,6 +250,8 @@
 								} finally {
 
 									try {
+										java.sql.Statement stmt1 = conn.createStatement();
+										stmt1.executeUpdate("DROP VIEW BuyingHistory");
 										conn.close();
 									} catch (Exception ee) {
 									}

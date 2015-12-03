@@ -76,15 +76,17 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="CustomerInformation.jsp"><i class="fa fa-dashboard fa-fw"></i>
+						<li><a href="CustomerHome.jsp"><i class="fa fa-user fa-fw"></i>
+								Customer Homepage</a></li>
+						<li><a href="CustomerInformation.jsp"><i class="fa fa-edit fa-fw"></i>
 								Personal Information</a></li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+						<li><a href="AllListings.jsp"><i class="fa fa-search fa-fw"></i>
 								Browse All Listings</a></li>
-						<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
-								Search for Sellers</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
+						<li><a href="AllCustomers.jsp"><i class="fa fa-users fa-fw"></i>
+								Our Sellers/Buyers</a></li>
+						<li><a href="PurchaseHistory.jsp"><i class="fa fa-usd fa-fw"></i>
 								Purchase History</a></li>
-						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
+						<li><a href="ListingHistory.jsp"><i class="fa fa-bullhorn fa-fw"></i>
 								Listing History</a></li>
 					</ul>
 				</div>
