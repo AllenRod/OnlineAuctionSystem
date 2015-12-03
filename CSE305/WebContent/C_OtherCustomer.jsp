@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.Calendar" %>
+
+<%
+	String cID = "" + request.getParameter("cID"); 
+%>
 <head>
 
 <meta charset="utf-8">
@@ -9,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Homepage - OAS</title>
+<title>Viewing User Information - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -51,8 +55,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="CustomerHome.jsp">Online Auction
-					System</a>
+				<a class="navbar-brand" href="CustomerHome.jsp">Online Auction System</a>
 			</div>
 			<!-- /.navbar-header -->
 
@@ -76,18 +79,18 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="CustomerHome.jsp"><i
-								class="fa fa-user fa-fw"></i> Customer Homepage</a></li>
-						<li><a href="CustomerInformation.jsp"><i
-								class="fa fa-edit fa-fw"></i> Personal Information</a></li>
-						<li><a href="AllListings.jsp"><i
-								class="fa fa-search fa-fw"></i> Browse All Listings</a></li>
-						<li><a href="AllCustomers.jsp"><i
-								class="fa fa-users fa-fw"></i> Our Sellers/Buyers</a></li>
-						<li><a href="PurchaseHistory.jsp"><i
-								class="fa fa-usd fa-fw"></i> Purchase History</a></li>
-						<li><a href="ListingHistory.jsp"><i
-								class="fa fa-bullhorn fa-fw"></i> Listing History</a></li>
+						<li><a href="CustomerHome.jsp"><i class="fa fa-user fa-fw"></i>
+								Customer Homepage</a></li>
+						<li><a href="CustomerInformation.jsp"><i class="fa fa-edit fa-fw"></i>
+								Personal Information</a></li>
+						<li><a href="AllListings.jsp"><i class="fa fa-search fa-fw"></i>
+								Browse All Listings</a></li>
+						<li><a href="AllCustomers.jsp"><i class="fa fa-users fa-fw"></i>
+								Our Sellers/Buyers</a></li>
+						<li><a href="PurchaseHistory.jsp"><i class="fa fa-usd fa-fw"></i>
+								Purchase History</a></li>
+						<li><a href="ListingHistory.jsp"><i class="fa fa-bullhorn fa-fw"></i>
+								Listing History</a></li>
 					</ul>
 				</div>
 
@@ -98,6 +101,7 @@
 		</nav>
 
 		<div id="page-wrapper">
+			<h1> Activities of User <%=cID%> </h1>
 			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">Currently Bidding on:</h3>
@@ -125,7 +129,6 @@
 								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
 								String mysUserID = "jiajli";
 								String mysPassword = "cse305QuickSilver";
-								String userID = "" + session.getAttribute("login");
 								Calendar cal = Calendar.getInstance();
 								java.sql.Connection conn = null;
 								try {
@@ -136,15 +139,16 @@
 
 									//connect to the database
 									conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
-									System.out.println("Connected successfully to database using JConnect");
+									System.out
+											.println("Connected successfully to database using JConnect");
 
 									java.sql.Statement stmt1 = conn.createStatement();
 
 									java.sql.ResultSet rs = stmt1
 											.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemID, Item.ItemName, Item.ItemType, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
-													+ userID
+													+ cID
 													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID and List.ClosingDate>'"
-													+ cal.getTime() + "'");
+													+ cal.getTime()+"'");
 									while (rs.next()) {
 							%>
 							<tr>
@@ -171,7 +175,7 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-
+			
 			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">Past Bids:</h3>
@@ -196,9 +200,9 @@
 							</thead>
 							<%
 								rs = stmt1.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemID, Item.ItemName, Item.ItemType, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
-													+ userID
+													+ cID
 													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID and List.ClosingDate<'"
-													+ cal.getTime() + "'");
+													+ cal.getTime()+"'");
 									while (rs.next()) {
 							%>
 							<tr>
@@ -217,6 +221,7 @@
 							</tr>
 							<%
 								}
+								
 							%>
 						</table>
 						<!-- /.table-responsive -->
@@ -225,11 +230,10 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-
+			
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header">Items you might want to take a look
-						at:</h3>
+					<h3 class="page-header">Active Listings:</h3>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -241,29 +245,19 @@
 							id="dataTables-example">
 							<thead>
 								<tr>
+									<th>Auction ID</th>
 									<th>Item ID</th>
 									<th>Item Name</th>
 									<th>Item Type</th>
-									<th>Item Description</th>
+									<th>End Time</th>
 								</tr>
 							</thead>
 							<%
-								stmt1.executeUpdate("CREATE VIEW BuyingHistory(ItemID, ItemName, ItemType, Num) AS "
-											+ "SELECT I.ItemID, I.ItemName, I.ItemType, COUNT(DISTINCT A.AuctionID) AS ItemCount "
-											+ "FROM Item I, Auction A, Bidon B WHERE A.ItemID = I.ItemID "
-											+ "AND B.BidderID='"
-											+ userID
-											+ "' AND B.AuctionID = A.AuctionID AND A.Status='CLOSED' AND "
-											+ "B.BidderID = (SELECT BidderID "
-											+ "FROM Bidon "
-											+ "WHERE BidAmt >= (SELECT MAX(B2.BidAmt) "
-											+ "FROM Bidon B2)) "
-											+ "GROUP BY I.ItemID, I.ItemName, I.ItemType ORDER BY ItemCount DESC;");
-								rs = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description "
-													+ "FROM Item I, BuyingHistory H "
-													+ "WHERE I.ItemType = H.ItemType AND I.ItemID <> H.ItemID "
-													+ "ORDER BY I.AmtInStock DESC LIMIT 5;");
-								while (rs.next()) {
+								rs = stmt1.executeQuery("SELECT L.AuctionID, A.ItemID, I.ItemName, I.ItemType, L.ClosingDate FROM List L, Auction A, Item I WHERE L.SellerID='"
+													+ cID
+													+ "' and A.AuctionID=L.AuctionID and A.ItemID=I.ItemID and L.ClosingDate>'"
+													+ cal.getTime()+"'");
+									while (rs.next()) {
 							%>
 							<tr>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
@@ -272,8 +266,59 @@
 								</td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
 								</td>
-								<td style="width: 150px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
 								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
+							</tr>
+							<%
+								}
+							%>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">Expired Listings:</h3>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Auction ID</th>
+									<th>Item ID</th>
+									<th>Item Name</th>
+									<th>Item Type</th>
+									<th>End Time</th>
+								</tr>
+							</thead>
+							<%
+								rs = stmt1.executeQuery("SELECT L.AuctionID, A.ItemID, I.ItemName, I.ItemType, L.ClosingDate FROM List L, Auction A, Item I WHERE L.SellerID='"
+													+ cID
+													+ "' and A.AuctionID=L.AuctionID and A.ItemID=I.ItemID and L.ClosingDate<'"
+													+ cal.getTime()+"'");
+									while (rs.next()) {
+							%>
+							<tr>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span>
 							</tr>
 							<%
 								}
@@ -283,8 +328,6 @@
 								} finally {
 
 									try {
-										java.sql.Statement stmt1 = conn.createStatement();
-										stmt1.executeUpdate("DROP VIEW BuyingHistory");
 										conn.close();
 									} catch (Exception ee) {
 									}
@@ -298,6 +341,7 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
+			
 		</div>
 	</div>
 	<!-- /#wrapper -->

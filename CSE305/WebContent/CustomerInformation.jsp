@@ -51,8 +51,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">Customer
-					Representative</a>
+				<a class="navbar-brand" href="index.html">Online Auction System</a>
 			</div>
 			<!-- /.navbar-header -->
 
@@ -97,7 +96,7 @@
 
 		<div id="page-wrapper">
 			<h2>Personal Information</h2>
-			<form name="myForm" action="editCustInfo.jsp" method="post">
+			<form name="myForm" action="C_editInfo.jsp" method="post">
 				<div class="form-group">
 					<label>ID</label> <input class="form-control"
 						name="id" value="${id}" readonly />
@@ -128,11 +127,15 @@
 				</div>
 				<div class="form-group">
 					<label>Zip Code</label> <input class="form-control"
-						name="zipcode" type="number" max="99999" value="${zipcode}" />
+						name="zipcode" type="text" value="${zipcode}" />
 				</div>
 				<div class="form-group">
 					<label>Telephone</label> <input class="form-control"
-						name="telephone" value="${telephone}" type="number" max="9999999999"/>
+						name="telephone" value="${telephone}" type="text"/>
+				</div>
+				<div class="form-group">
+					<label>Credit Card Number</label> <input class="form-control"
+						name="ccn" value="${ccn}" type="text"/>
 				</div>
 				<button type="submit" class="btn btn-primary">Edit</button>
 			</form>
