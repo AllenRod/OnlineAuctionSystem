@@ -230,7 +230,8 @@
                     		+ " L.AuctionID = A.AuctionID"
                     		+ " AND A.Status = 'CLOSED'"
                     		+ " AND B.AuctionID = L.AuctionID"
-                    		+ " AND B.BidAmt >= (Select MAX(B1.BidAmt) From Bidon B1)");
+                    		+ " AND B.BidAmt >= (Select MAX(B1.BidAmt) From Bidon B1)"
+                    		+ "GROUP BY ItemName");
           while(rs.next())
             {
 %>
