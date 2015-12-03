@@ -201,7 +201,7 @@
                                             <th>Item ID</th>
                                             <th>Item Type</th>
                                             <th>Employee ID</th>
-                                            <th>Amount</th>
+                                            <th>Bid Amount</th>
                                             <th>Auction ID</th>
                                         </tr>
                                     </thead>
