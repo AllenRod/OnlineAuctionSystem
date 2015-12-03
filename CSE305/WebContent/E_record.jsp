@@ -44,11 +44,9 @@
 		} else {
 			System.out.println("Auction found");
 			session.setAttribute("returnVal", "");
-			stmt1.executeUpdate("UPDATE Auction SET Auction.Status='CLOSED' WHERE AuctionID='"
-					+ auctionID + "'");
 			stmt1.executeUpdate("CREATE VIEW Sale(AuctionID, BuyerID, SellerID, PaidAmt, ClosingTime) AS "
 					+ "SELECT A.AuctionID, B.BidderID, L.SellerID, B.BidAmt, L.ClosingDate "
-					+ "FROM Auction A, Bidon B, List L WHERE A.AuctionID='"
+					+ "FROM Auction A, Bidon B, List L WHERE A.Status = 'CLOSED' AND A.AuctionID='"
 					+ auctionID
 					+ "' AND L.AuctionID='"
 					+ auctionID
