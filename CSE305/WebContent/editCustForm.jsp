@@ -107,7 +107,7 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<h2>Cstomer Edit Page</h2>
+			<h2>Customer Edit Page</h2>
 			<form name="myForm" action="editCustInfo.jsp" method="post">
 				<div class="form-group">
 					<label>ID</label> <input class="form-control" name="id"
