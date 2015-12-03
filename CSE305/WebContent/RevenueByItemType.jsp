@@ -220,7 +220,7 @@
 					<c:if test="${not empty itemType and itemType ne ''}">
 						<tr>
 							<td>${itemType}</td>
-							<td>${revenueGenerate}</td>
+							<td>${revenueGenerated}</td>
 						</tr>
 					</c:if>
 				</table>
