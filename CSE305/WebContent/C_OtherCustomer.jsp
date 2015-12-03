@@ -129,7 +129,6 @@
 								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
 								String mysUserID = "jiajli";
 								String mysPassword = "cse305QuickSilver";
-								Calendar cal = Calendar.getInstance();
 								java.sql.Connection conn = null;
 								try {
 									Class.forName(mysJDBCDriver).newInstance();
@@ -147,8 +146,7 @@
 									java.sql.ResultSet rs = stmt1
 											.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemID, Item.ItemName, Item.ItemType, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
 													+ cID
-													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID and List.ClosingDate>'"
-													+ cal.getTime()+"'");
+													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID and Auction.Status='OPEN'");
 									while (rs.next()) {
 							%>
 							<tr>
@@ -201,8 +199,7 @@
 							<%
 								rs = stmt1.executeQuery("SELECT DISTINCT Bidon.AuctionID, Item.ItemID, Item.ItemName, Item.ItemType, MAX(BidOn.BidAmt), List.ClosingDate FROM Bidon, Auction, Item, List WHERE Bidon.BidderID='"
 													+ cID
-													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID and List.ClosingDate<'"
-													+ cal.getTime()+"'");
+													+ "' and Auction.AuctionID=Bidon.AuctionID and Auction.ItemID=Item.ItemID and Bidon.AuctionID=List.AuctionID and Auction.Status='CLOSED'");
 									while (rs.next()) {
 							%>
 							<tr>
@@ -255,8 +252,7 @@
 							<%
 								rs = stmt1.executeQuery("SELECT L.AuctionID, A.ItemID, I.ItemName, I.ItemType, L.ClosingDate FROM List L, Auction A, Item I WHERE L.SellerID='"
 													+ cID
-													+ "' and A.AuctionID=L.AuctionID and A.ItemID=I.ItemID and L.ClosingDate>'"
-													+ cal.getTime()+"'");
+													+ "' and A.AuctionID=L.AuctionID and A.ItemID=I.ItemID and A.Status='OPEN'");
 									while (rs.next()) {
 							%>
 							<tr>
@@ -306,8 +302,7 @@
 							<%
 								rs = stmt1.executeQuery("SELECT L.AuctionID, A.ItemID, I.ItemName, I.ItemType, L.ClosingDate FROM List L, Auction A, Item I WHERE L.SellerID='"
 													+ cID
-													+ "' and A.AuctionID=L.AuctionID and A.ItemID=I.ItemID and L.ClosingDate<'"
-													+ cal.getTime()+"'");
+													+ "' and A.AuctionID=L.AuctionID and A.ItemID=I.ItemID and A.Status='CLOSED'");
 									while (rs.next()) {
 							%>
 							<tr>
