@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="ManagerHome.jsp">Manager</a>
+                <a class="navbar-brand" href="ManagerHome.jsp">Manage</a>
             </div>
             <!-- /.navbar-header -->
 
