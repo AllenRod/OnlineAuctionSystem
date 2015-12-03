@@ -59,7 +59,15 @@
 		<!-- Page Content -->
 		<div id="page-wrapper">
 			<div class="container-fluid">
-				<div class="row">
+			<br>
+				<select class="form-control">
+				<option value="system">System</option>
+				<option value="manager">Manager</option>
+				<option value="emp">Customer Representative</option>
+				<option value="customer">Customer</option>
+			</select>
+			<br>
+				<div class="row" id="divsystem">
 					<div class="col-lg-12">
 						<h1 class="page-header">System</h1>
 					</div>
@@ -80,7 +88,8 @@
 					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /.row -->
-				<div class="row">
+
+				<div class="row" id="divmanager">
 					<div class="col-lg-12">
 						<h1 class="page-header">Manager</h1>
 					</div>
@@ -100,7 +109,8 @@
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
-				<div class="row">
+
+				<div class="row" id="divemp">
 					<div class="col-lg-12">
 						<h1 class="page-header">Customer Representative</h1>
 					</div>
@@ -160,7 +170,8 @@
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
-				<div class="row">
+
+				<div class="row" id="divcustomer">
 					<div class="col-lg-12">
 						<h1 class="page-header">Customer</h1>
 					</div>
@@ -209,6 +220,17 @@
 		function Button2_onclick() {
 			window.scrollTo(0, 0);
 		}
+	</script>
+
+	<script>
+	$(function() {
+        $('select').change(function() {
+			var name = $(this).find(":selected").val();
+			$('html,body').animate({
+                scrollTop: $('#div'+name).offset().top
+            }, 1000);
+    	});
+    });
 	</script>
 
 </body>
