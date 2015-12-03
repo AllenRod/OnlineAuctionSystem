@@ -191,54 +191,79 @@
 			</div>
 			<!-- /.row -->
 			<div class="row">
-				<table class="table table-striped">
-					<tr>
-						<th>Item ID</th>
-						<th>Item Name</th>
-						<th>Item Type</th>
-						<th>Description</th>
-					</tr>
-					<c:if test="${not empty itemID0}">
-						<tr>
-							<td>${itemID0}</td>
-							<td>${itemName0}</td>
-							<td>${type0}</td>
-							<td>${desc0}</td>
-						</tr>
-					</c:if>
-					<c:if test="${not empty itemID1}">
-						<tr>
-							<td>${itemID1}</td>
-							<td>${itemName1}</td>
-							<td>${type1}</td>
-							<td>${desc1}</td>
-						</tr>
-					</c:if>
-					<c:if test="${not empty itemID2}">
-						<tr>
-							<td>${itemID2}</td>
-							<td>${itemName2}</td>
-							<td>${type2}</td>
-							<td>${desc2}</td>
-						</tr>
-					</c:if>
-					<c:if test="${not empty itemID3}">
-						<tr>
-							<td>${itemID3}</td>
-							<td>${itemName3}</td>
-							<td>${type3}</td>
-							<td>${desc3}</td>
-						</tr>
-					</c:if>
-					<c:if test="${not empty itemID4}">
-						<tr>
-							<td>${itemID4}</td>
-							<td>${itemName4}</td>
-							<td>${type4}</td>
-							<td>${desc4}</td>
-						</tr>
-					</c:if>
-				</table>
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<table class="table table-striped table-bordered table-hover"
+							id="dataTables-example">
+							<thead>
+								<tr>
+									<th>Item ID</th>
+									<th>Item Name</th>
+									<th>Item Type</th>
+									<th>Item Description</th>
+								</tr>
+							</thead>
+							<%
+								try {
+									Class.forName(mysJDBCDriver).newInstance();
+									java.util.Properties sysprops = System.getProperties();
+									sysprops.put("user", mysUserID);
+									sysprops.put("password", mysPassword);
+
+									//connect to the database
+									conn = java.sql.DriverManager.getConnection(mysURL, sysprops);
+									System.out.println("Connected successfully to database using JConnect");
+
+									java.sql.Statement stmt1 = conn.createStatement();
+
+									stmt1.executeUpdate("CREATE VIEW BuyingHistory(ItemID, ItemName, ItemType, Num) AS "
+											+ "SELECT I.ItemID, I.ItemName, I.ItemType, COUNT(DISTINCT A.AuctionID) AS ItemCount "
+											+ "FROM Item I, Auction A, Bidon B WHERE A.ItemID = I.ItemID "
+											+ "AND B.BidderID='" + userID
+											+ "' AND B.AuctionID = A.AuctionID AND A.Status='CLOSED' AND "
+											+ "B.BidderID = (SELECT BidderID "
+											+ "FROM Bidon "
+											+ "WHERE BidAmt >= (SELECT MAX(B2.BidAmt) "
+											+ "FROM Bidon B2)) "
+											+ "GROUP BY I.ItemID, I.ItemName, I.ItemType ORDER BY ItemCount DESC;");
+									java.sql.ResultSet rs2 = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description "
+											+ "FROM Item I, BuyingHistory H "
+											+ "WHERE I.ItemType = H.ItemType AND I.ItemID <> H.ItemID "
+											+ "ORDER BY I.AmtInStock DESC LIMIT 5;");
+									while (rs2.next()) {
+							%>
+							<tr>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(1)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(2)%></span>
+								</td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs2.getString(3)%></span>
+								</td>
+								<td style="width: 150px"><span style="font-size: 10pt"><%=rs2.getString(4)%></span>
+								</td>
+							</tr>
+							<%
+								}
+								} catch (Exception e) {
+									e.printStackTrace();
+									out.print(e.toString());
+								} finally {
+
+									try {
+										java.sql.Statement stmt1 = conn.createStatement();
+										stmt1.executeUpdate("DROP VIEW BuyingHistory");
+										conn.close();
+									} catch (Exception ee) {
+									}
+									;
+								}
+							%>
+						</table>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
 			</div>
 		</div>
 	</div>
