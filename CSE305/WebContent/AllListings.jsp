@@ -41,12 +41,9 @@
 
 <script language="javascript" type="text/javascript">
 	function Button1_onclick() {
-		if (document.myForm.firstName.value == ""
-				|| document.myForm.lastName.value == "") {
-			alert("Please fill out all fields!");
-			return false;
-		} else if (document.myForm.password.value != document.myForm.passwordvrf.value) {
-			alert("Password not matching!");
+		if (document.myForm.itemType.value == ""
+				&& document.myForm.keywords.value == "") {
+			alert("Please fill out at least one field!");
 			return false;
 		} else
 			document.myForm.submit()
@@ -127,16 +124,16 @@
 						<div>
 							<label style="font-size: 10pt">Search within a particular
 								item type </label> <select id="itemType" name="itemType">
-								<option value="" selected>Select</option>
+								<option value="">Select</option>
 								<option value="books">Books</option>
 								<option value="electronics">Electronics</option>
 								<option value="apparel">Apparel</option>
 								<option value="car">Car</option>
 								<option value="kitchen">Kitchen</option>
 								<option value="DVD">DVD</option>
-							</select> <label style="font-size: 10pt"> and/or </label> <input
+							</select> <label style="font-size: 10pt"> and/or using keywords of the item </label> <input
 								id="keywords" type="text" name="keywords"
-								placeholder="using item keywords" />
+								placeholder="use a space to separate" />
 							<button id="searchButton" type="Submit"
 								onclick="return Button1_onclick()">Search</button>
 						</div>
