@@ -41,7 +41,7 @@
 			session.setAttribute("itemType", "");
 			session.setAttribute("returnVal", "Item Type Not Found");
 			response.sendRedirect("RevenueByItemType.jsp");
-			//stmt1.close();
+			stmt1.close();
 			return;
 		} else {
 			System.out.println("ItemType found");
