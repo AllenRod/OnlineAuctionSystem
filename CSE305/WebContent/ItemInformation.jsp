@@ -44,9 +44,6 @@
 	function Button1_onclick() {
 		javascript: myForm.submit();
 	}
-	function Button2_onclick() {
-	    window.open("Top5Sellers.jsp","_self");
-	}
 </script>
 </head>
 
