@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+	String iID = "" + request.getParameter("iID"); 
+%>
 <head>
 
 <meta charset="utf-8">
@@ -9,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>All Auction Listings - OAS</title>
+<title>All Customers - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -38,24 +40,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 <script language="javascript" type="text/javascript">
 	function Button1_onclick() {
-		if (document.myForm.firstName.value == ""
-				|| document.myForm.lastName.value == "") {
-			alert("Please fill out all fields!");
-			return false;
-		} else if (document.myForm.password.value != document.myForm.passwordvrf.value) {
-			alert("Password not matching!");
-			return false;
-		} else
-			document.myForm.submit()
-	}
-	function Button2_onclick() {
 		javascript: myForm.submit();
 	}
+	function Button2_onclick() {
+	    window.open("Top5Sellers.jsp","_self");
+	}
 </script>
-
 </head>
 
 <body>
@@ -120,53 +112,23 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<div class="input-group">
-				<form name="myForm" action="AllListingsSearch.jsp" method="post"
-					role="form">
-					<fieldset>
-						<div>
-							<label style="font-size: 10pt">Search within a particular
-								item type </label> <select id="itemType" name="itemType">
-								<option value="" selected>Select</option>
-								<option value="books">Books</option>
-								<option value="electronics">Electronics</option>
-								<option value="apparel">Apparel</option>
-								<option value="car">Car</option>
-								<option value="kitchen">Kitchen</option>
-								<option value="DVD">DVD</option>
-							</select> <label style="font-size: 10pt"> and/or </label> <input
-								id="keywords" type="text" name="keywords"
-								placeholder="using item keywords" />
-							<button id="searchButton" type="Submit"
-								onclick="return Button1_onclick()">Search</button>
-						</div>
-					</fieldset>
-				</form>
-
-			</div>
-			<h2>All Auction Listings</h2>
-			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Auction ID</th>
-								<th>Seller ID</th>
-								<th>Item ID</th>
-								<th>Item Name</th>
-								<th>Item Type</th>
-								<th>Current Price</th>
-								<th>Closing Time</th>
-							</tr>
-						</thead>
-						<tbody>
-							<%
+			<div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">Information of Item <%=iID%></h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                    <%
 								String mysJDBCDriver = "com.mysql.jdbc.Driver";
 								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
 								String mysUserID = "jiajli";
 								String mysPassword = "cse305QuickSilver";
 
-								String profId = "" + session.getValue("login");
+								String userID = "" + session.getValue("login");
 								java.sql.Connection conn = null;
 								try {
 									Class.forName(mysJDBCDriver).newInstance();
@@ -181,45 +143,34 @@
 
 									java.sql.Statement stmt1 = conn.createStatement();
 
-									java.sql.ResultSet rs = stmt1
-											.executeQuery("SELECT A.AuctionID, L.SellerID, A.ItemID, I.ItemName, I.ItemType, A.CurrentBid, L.ClosingDate"
-													+ " FROM Item I, Auction A, List L"
-													+ " WHERE A.ItemID = I.ItemID "
-													+ " AND A.AuctionID = L.AuctionID");
-
-									while (rs.next()) {
-							%>
-							<tr>
-								<form name="myForm" action="AuctionInformation.jsp"
-									method="post" role="form">
-									<td style="width: 80px"><span style="font-size: 10pt">
-											<input type="hidden" value="<%=rs.getString(1)%>" name="aID">
-											<input type="submit" value="<%=rs.getString(1)%>"
-											onclick="return Button2_onclick()">
-									</span></td>
-								</form>
-								<form name="myForm" action="C_OtherCustomer.jsp" method="post"
-									role="form">
-									<td style="width: 80px"><span style="font-size: 10pt">
-											<input type="hidden" value="<%=rs.getString(2)%>" name="cID">
-											<input type="submit" value="<%=rs.getString(2)%>"
-											onclick="return Button2_onclick()">
-									</span></td>
-								</form>
-								<form name="myForm" action="ItemInformation.jsp" method="post"
-									role="form">
-									<td style="width: 80px"><span style="font-size: 10pt">
-											<input type="hidden" value="<%=rs.getString(3)%>" name="iID">
-											<input type="submit" value="<%=rs.getString(3)%>"
-											onclick="return Button2_onclick()">
-									</span></td>
-								</form>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(6)%></span></td>
-								<td style="width: 150px"><span style="font-size: 10pt"><%=rs.getString(7)%></span></td>
-							</tr>
-							<%
+									java.sql.ResultSet rs = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description, I.YearManu, I.CopiesSold, I.AmtInStock FROM Item I WHERE I.ItemID='"
+											+ iID + "'");
+									if (rs.next()) {
+					%>
+                        <div class="panel-heading">
+                            Item ID: <%=rs.getString(1)%>
+                        </div>
+                        <div class="panel-heading">
+                            Item Name: <%=rs.getString(2)%>
+                        </div>
+                        <div class="panel-heading">
+                            Item Type: <%=rs.getString(3)%>
+                        </div>
+                        <div class="panel-body">
+                            <p><%=rs.getString(4)%></p>
+                        </div>
+                        <div class="panel-footer">
+                            Year Manufactured: <%=rs.getString(5)%>
+                        </div>
+                        <div class="panel-footer">
+                            Copies Sold: <%=rs.getString(6)%>
+                        </div>
+                        <div class="panel-footer">
+                            Amount In Stock: <%=rs.getString(7)%>
+                        </div>
+                    </div>
+                </div>
+                <%
 								}
 								} catch (Exception e) {
 									e.printStackTrace();

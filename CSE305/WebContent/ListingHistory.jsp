@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.Calendar"%>
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <title>All Listings - OAS</title>
+<title>All Listings - OAS</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="template_admin2/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Core CSS -->
+<link
+	href="template_admin2/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="template_admin2/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+<!-- MetisMenu CSS -->
+<link
+	href="template_admin2/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="template_admin2/dist/css/timeline.css" rel="stylesheet">
+<!-- Timeline CSS -->
+<link href="template_admin2/dist/css/timeline.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="template_admin2/dist/css/sb-admin-2.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="template_admin2/dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="template_admin2/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- Custom Fonts -->
+<link
+	href="template_admin2/bower_components/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -37,67 +43,67 @@
 
 <body>
 
-    <div id="wrapper">
+	<div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="CustomerHome.jsp">Online Auction System</a>
-            </div>
-            <!-- /.navbar-header -->
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="CustomerHome.jsp">Online Auction
+					System</a>
+			</div>
+			<!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
-               
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        ${firstName} ${lastName}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="index.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+			<ul class="nav navbar-top-links navbar-right">
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-						<li><a href="CustomerHome.jsp"><i class="fa fa-user fa-fw"></i>
-								Customer Homepage</a></li>
-						<li><a href="CustomerInformation.jsp"><i class="fa fa-edit fa-fw"></i>
-								Personal Information</a></li>
-						<li><a href="AllListings.jsp"><i class="fa fa-search fa-fw"></i>
-								Browse All Listings</a></li>
-						<li><a href="AllCustomers.jsp"><i class="fa fa-users fa-fw"></i>
-								Our Sellers/Buyers</a></li>
-						<li><a href="PurchaseHistory.jsp"><i class="fa fa-usd fa-fw"></i>
-								Purchase History</a></li>
-						<li><a href="ListingHistory.jsp"><i class="fa fa-bullhorn fa-fw"></i>
-								Listing History</a></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> ${firstName} ${lastName}<i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="index.htm"><i class="fa fa-sign-out fa-fw"></i>
+								Logout</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+			<!-- /.navbar-top-links -->
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li><a href="CustomerHome.jsp"><i
+								class="fa fa-user fa-fw"></i> Customer Homepage</a></li>
+						<li><a href="CustomerInformation.jsp"><i
+								class="fa fa-edit fa-fw"></i> Personal Information</a></li>
+						<li><a href="AllListings.jsp"><i
+								class="fa fa-search fa-fw"></i> Browse All Listings</a></li>
+						<li><a href="AllCustomers.jsp"><i
+								class="fa fa-users fa-fw"></i> Our Sellers/Buyers</a></li>
+						<li><a href="PurchaseHistory.jsp"><i
+								class="fa fa-usd fa-fw"></i> Purchase History</a></li>
+						<li><a href="ListingHistory.jsp"><i
+								class="fa fa-bullhorn fa-fw"></i> Listing History</a></li>
 					</ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+			<!-- /.navbar-static-side -->
+		</nav>
 
-        <div id="page-wrapper">
-            <div class="row">
+		<div id="page-wrapper">
+			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">Active Listings:</h3>
 				</div>
@@ -118,7 +124,7 @@
 									<th>End Time</th>
 								</tr>
 							</thead>
-<%
+							<%
 								String mysJDBCDriver = "com.mysql.jdbc.Driver";
 								String mysURL = "jdbc:mysql://mysql2.cs.stonybrook.edu:3306/jiajli";
 								String mysUserID = "jiajli";
@@ -146,10 +152,22 @@
 									while (rs.next()) {
 							%>
 							<tr>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
-								</td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
-								</td>
+								<form name="myForm" action="AuctionInformation.jsp"
+									method="post" role="form">
+									<td style="width: 80px"><span style="font-size: 10pt">
+											<input type="hidden" value="<%=rs.getString(1)%>" name="aID">
+											<input type="submit" value="<%=rs.getString(1)%>"
+											onclick="return Button1_onclick()">
+									</span></td>
+								</form>
+								<form name="myForm" action="ItemInformation.jsp" method="post"
+									role="form">
+									<td style="width: 80px"><span style="font-size: 10pt">
+											<input type="hidden" value="<%=rs.getString(2)%>" name="iID">
+											<input type="submit" value="<%=rs.getString(2)%>"
+											onclick="return Button1_onclick()">
+									</span></td>
+								</form>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
 								</td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
@@ -167,7 +185,7 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			
+
 			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">Expired Listings:</h3>
@@ -197,10 +215,22 @@
 									while (rs.next()) {
 							%>
 							<tr>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(1)%></span>
-								</td>
-								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span>
-								</td>
+								<form name="myForm" action="AuctionInformation.jsp"
+									method="post" role="form">
+									<td style="width: 80px"><span style="font-size: 10pt">
+											<input type="hidden" value="<%=rs.getString(1)%>" name="aID">
+											<input type="submit" value="<%=rs.getString(1)%>"
+											onclick="return Button1_onclick()">
+									</span></td>
+								</form>
+								<form name="myForm" action="ItemInformation.jsp" method="post"
+									role="form">
+									<td style="width: 80px"><span style="font-size: 10pt">
+											<input type="hidden" value="<%=rs.getString(2)%>" name="iID">
+											<input type="submit" value="<%=rs.getString(2)%>"
+											onclick="return Button1_onclick()">
+									</span></td>
+								</form>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span>
 								</td>
 								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(4)%></span>
@@ -229,24 +259,27 @@
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
-			
-        </div>
-        <!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+		</div>
+		<!-- /#page-wrapper -->
 
-    <!-- jQuery -->
-    <script src="template_admin2/bower_components/jquery/dist/jquery.min.js"></script>
+	</div>
+	<!-- /#wrapper -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="template_admin2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- jQuery -->
+	<script
+		src="template_admin2/bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="template_admin2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="template_admin2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="template_admin2/dist/js/sb-admin-2.js"></script>
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="template_admin2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- Custom Theme JavaScript -->
+	<script src="template_admin2/dist/js/sb-admin-2.js"></script>
 
 </body>
 
