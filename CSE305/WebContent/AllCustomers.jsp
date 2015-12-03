@@ -42,6 +42,9 @@
 	function Button1_onclick() {
 		javascript: myForm.submit();
 	}
+	function Button2_onclick() {
+	    window.open("Top5Sellers.jsp","_self");
+	}
 </script>
 </head>
 
@@ -108,11 +111,11 @@
 
 		<div id="page-wrapper">
 			<div class="input-group">
-				<form name="myForm" action=".jsp" method="post" role="form">
+				<form name="myForm" action="C_OtherCustomer.jsp" method="post" role="form">
 					<fieldset>
 						<div>
 							<label style="font-size: 10pt">Search for a user </label> <input
-								id="userSearch" type="text" name="userSearch"
+								id="userSearch" type="text" name="cID"
 								placeholder="Enter user ID" />
 							<button type="submit" id="userSearchButton"
 								onclick="return Button1_onclick()">Search</button>

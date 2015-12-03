@@ -50,7 +50,7 @@
 		session.setAttribute("cName",
 				rs.getNString(1) + " " + rs.getNString(2));
 		// Create View BuyerHistory
-		stmt1.executeUpdate("CREATE VIEW BuyerHistory(ItemID, ItemName, ItemType, Num) AS "
+		stmt1.executeUpdate("CREATE VIEW BuyerHistory_E(ItemID, ItemName, ItemType, Num) AS "
 				+ "SELECT I.ItemID, I.ItemName, I.ItemType, COUNT(DISTINCT A.AuctionID) AS ItemCount "
 				+ "FROM Item I, Auction A, Bidon B WHERE A.ItemID = I.ItemID "
 				+ "AND B.BidderID='" + customerID
@@ -61,7 +61,7 @@
 				+ "FROM Bidon B2)) "
 				+ "GROUP BY I.ItemID, I.ItemName, I.ItemType ORDER BY ItemCount DESC;");
 		rs = stmt1.executeQuery("SELECT I.ItemID, I.ItemName, I.ItemType, I.Description "
-				+ "FROM Item I, BuyerHistory H "
+				+ "FROM Item I, BuyerHistory_E H "
 				+ "WHERE I.ItemType = H.ItemType AND I.ItemID <> H.ItemID "
 				+ "ORDER BY I.AmtInStock DESC LIMIT 5;");
 		int i = 0;
@@ -72,7 +72,7 @@
 			session.setAttribute("desc" + i, rs.getNString(4));
 			i++;
 		}
-		stmt1.executeUpdate("DROP VIEW BuyerHistory");
+		stmt1.executeUpdate("DROP VIEW BuyerHistory_E");
 		stmt1.close();
 		response.sendRedirect("E_itemSugg.jsp");
 	} catch (Exception e) {

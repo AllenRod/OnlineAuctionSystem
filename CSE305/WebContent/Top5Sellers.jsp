@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Customer Representative Mailing List - OAS</title>
+<title>Top 5 Sellers - OAS</title>
 
 <!-- Bootstrap Core CSS -->
 <link
@@ -27,14 +27,25 @@
 <!-- Custom CSS -->
 <link href="template_admin2/dist/css/sb-admin-2.css" rel="stylesheet">
 
-<!-- Morris Charts CSS -->
-<link href="template_admin2/bower_components/morrisjs/morris.css"
-	rel="stylesheet">
-
 <!-- Custom Fonts -->
 <link
 	href="template_admin2/bower_components/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script language="javascript" type="text/javascript">
+	function Button1_onclick() {
+		javascript: myForm.submit();
+	}
+	function Button2_onclick() {
+	    window.open("AllCustomers.jsp","_self");
+	}
+</script>
 </head>
 
 <body>
@@ -51,20 +62,23 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">Customer
-					Representative</a>
+				<a class="navbar-brand" href="CustomerHome.jsp">Online Auction
+					System</a>
 			</div>
 			<!-- /.navbar-header -->
 
 			<ul class="nav navbar-top-links navbar-right">
+
+				<!-- /.dropdown -->
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">${firstName} ${lastName}<i
+					data-toggle="dropdown" href="#"> ${firstName} ${lastName}<i
 						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
 								Profile</a></li>
-						<li><a href="help.html"><i class="fa fa-gear fa-fw"></i> Help</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
 						<li class="divider"></li>
 						<li><a href="index.htm"><i class="fa fa-sign-out fa-fw"></i>
 								Logout</a></li>
@@ -76,24 +90,18 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="EmployeeHome.jsp"><i class="fa fa-home fa-fw"></i>
-								Home</a></li>
-						<li><a href="E_saleRecord.jsp"><i class="fa fa-bars fa-fw"></i>
-								Record Sale</a></li>
-						<li><a href="E_mailList.jsp"><i class="fa fa-envelope fa-fw"></i>
-								Mailing List</a></li>
-						<li><a href="E_itemSugg.jsp"><i class="fa fa-th-list fa-fw"></i>
-								Item Suggestions</a></li>
-						<li><a href="E_receipt.jsp"><i class="fa fa-file-text fa-fw"></i>
-								Receipt</a></li>	
-						<li><a href="#"><i class="fa fa-users fa-fw"></i>
-								Customers<span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level">
-								<li><a href="CustomerRegistration.htm">New Customer</a></li>
-								<li><a href="E_findCustomer.jsp">Find Customer</a></li>
-							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="E_allEmp.jsp"><i class="fa fa-users fa-fw"></i>
-								Employee Info</a></li>
+						<li><a href="CustomerHome.jsp"><i
+								class="fa fa-user fa-fw"></i> Customer Homepage</a></li>
+						<li><a href="CustomerInformation.jsp"><i
+								class="fa fa-edit fa-fw"></i> Personal Information</a></li>
+						<li><a href="AllListings.jsp"><i
+								class="fa fa-search fa-fw"></i> Browse All Listings</a></li>
+						<li><a href="AllCustomers.jsp"><i
+								class="fa fa-users fa-fw"></i> Our Sellers/Buyers</a></li>
+						<li><a href="PurchaseHistory.jsp"><i
+								class="fa fa-usd fa-fw"></i> Purchase History</a></li>
+						<li><a href="ListingHistory.jsp"><i
+								class="fa fa-bullhorn fa-fw"></i> Listing History</a></li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -102,19 +110,30 @@
 		</nav>
 
 		<div id="page-wrapper">
-			<h2>Mailing List</h2>
+			<div class="input-group">
+				<form name="myForm" action="C_OtherCustomer.jsp" method="post" role="form">
+					<fieldset>
+						<div>
+							<label style="font-size: 10pt">Search for a user </label> <input
+								id="userSearch" type="text" name="cID"
+								placeholder="Enter user ID" />
+							<button type="submit" id="userSearchButton"
+								onclick="return Button1_onclick()">Search</button>
+							<button type="button" id="goBack"
+								onclick="return Button2_onclick()">Go Back To All Users</button>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<h2>Top 5 Sellers with Highest Rating</h2>
 			<div class="panel-body">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered">
+					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>Last Name</th>
-								<th>First Name</th>
-								<th>Address</th>
-								<th>City</th>
-								<th>State</th>
-								<th>ZipCode</th>
-								<th>Email</th>
+								<th>Customer ID</th>
+								<th>Items Sold</th>
+								<th>Seller Rating</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -124,7 +143,7 @@
 								String mysUserID = "jiajli";
 								String mysPassword = "cse305QuickSilver";
 
-								String profId = "" + session.getAttribute("login");
+								String userID = "" + session.getValue("login");
 								java.sql.Connection conn = null;
 								try {
 									Class.forName(mysJDBCDriver).newInstance();
@@ -140,20 +159,21 @@
 									java.sql.Statement stmt1 = conn.createStatement();
 
 									java.sql.ResultSet rs = stmt1
-											.executeQuery("SELECT P.LastName, P.FirstName, P.Address, P.City, "
-													+ "P.State, P.ZipCode, C.Email FROM person P, customer C "
-													+ "WHERE P.ID = C.CustomerID ORDER BY LastName;");
+											.executeQuery("SELECT DISTINCT C.CustomerID, C.ItemSold, C.SellerRating FROM Customer C, List L"
+													+" WHERE C.CustomerID = L.SellerID ORDER BY C.SellerRating DESC LIMIT 5");
 									while (rs.next()) {
 							%>
 							<tr>
-								<td ><span style="font-size: 10pt"><%=rs.getString(1)%></span></td>
-								<td ><span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
-								<td ><span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
-								<td ><span style="font-size: 10pt"><%=rs.getString(4)%></span></td>
-								<td ><span style="font-size: 10pt"><%=rs.getString(5)%></span></td>
-								<td ><span style="font-size: 10pt"><%=rs.getString(6)%></span></td>
-								<td ><span style="font-size: 10pt"><%=rs.getString(7)%></span></td>
-
+								<form name="myForm" action="C_OtherCustomer.jsp" method="post" role="form">
+									<td style="width: 80px">
+										<span style="font-size: 10pt">
+											<input type="hidden" value="<%=rs.getString(1)%>" name="cID">
+											<input type="submit" value="<%=rs.getString(1)%>" onclick="return Button1_onclick()">
+										</span>
+									</td>
+								</form>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(2)%></span></td>
+								<td style="width: 80px"><span style="font-size: 10pt"><%=rs.getString(3)%></span></td>
 							</tr>
 							<%
 								}
@@ -191,7 +211,6 @@
 	<!-- Metis Menu Plugin JavaScript -->
 	<script
 		src="template_admin2/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
 
 	<!-- Custom Theme JavaScript -->
 	<script src="template_admin2/dist/js/sb-admin-2.js"></script>
