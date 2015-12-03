@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Manager</a>
+                <a class="navbar-brand" href="ManagerHome.jsp">Manager</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -60,9 +60,7 @@
                         ${firstname} ${lastname}<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="help.html"><i class="fa fa-gear fa-fw"></i> Help</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="index.htm"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -78,16 +76,16 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Manager Info</a>
+                            <a href="ManagerHome.jsp"><i class="fa fa-dashboard fa-fw"></i> Manager Info</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Employees<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">New Employee</a>
+                                    <a href="EditEmployeeForm.jsp">New Employee</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Find Employee</a>
+                                    <a href="M_findEmployee.jsp">Find Employee</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -96,58 +94,55 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Sales Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">January</a>
+                                    <a href="SalesReportJan.jsp">January</a>
                                 </li>
                                 <li>
-                                    <a href="#">February</a>
+                                    <a href="SalesReportFeb.jsp">February</a>
                                 </li>
                                 <li>
-                                    <a href="#">March</a>
+                                    <a href="SalesReportMar.jsp">March</a>
                                 </li>
                                 <li>
-                                    <a href="#">April</a>
+                                    <a href="SalesReportApr.jsp">April</a>
                                 </li>
                                 <li>
-                                    <a href="#">May</a>
+                                    <a href="SalesReportMay.jsp">May</a>
                                 </li>
                                 <li>
-                                    <a href="#">June</a>
+                                    <a href="SalesReportJun.jsp">June</a>
                                 </li>
                                 <li>
-                                    <a href="#">July</a>
+                                    <a href="SalesReportJul.jsp">July</a>
                                 </li>
                                 <li>
-                                    <a href="#">August</a>
+                                    <a href="SalesReportAug.jsp">August</a>
                                 </li>
                                 <li>
-                                    <a href="#">September</a>
+                                    <a href="SalesReportSep.jsp">September</a>
                                 </li>
                                 <li>
-                                    <a href="#">October</a>
+                                    <a href="SalesReportOct.jsp">October</a>
                                 </li>
                                 <li>
-                                    <a href="#">November</a>
+                                    <a href="SalesReportNov.jsp">November</a>
                                 </li>
                                 <li>
-                                    <a href="#">December</a>
+                                    <a href="SalesReportDec.jsp">December</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Items</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="ItemDisplay.jsp"><i class="fa fa-table fa-fw"></i> Items</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Sales By<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="panels-wells.html">Item Name</a>
+                                    <a href="SalesByItemName.jsp">Item Name</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Customer Name</a>
+                                    <a href="SalesByCustomerName.jsp">Customer Name</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -156,13 +151,13 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Summary Revenue By<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Item</a>
+                                    <a href="RevenueByItem.jsp">Item</a>
                                 </li>
                                 <li>
-                                    <a href="#">Item Type</a>
+                                    <a href="RevenueByItemType.jsp">Item Type</a>
                                 </li>
                                 <li>
-                                    <a href="#">Customer</a>
+                                    <a href="RevenueByCustomer.jsp">Customer</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -171,16 +166,16 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Highest Total Revenue By<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">Customer Representative</a>
+                                    <a href="TotalRevenueEmployee.jsp">Customer Representative</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Customer</a>
+                                    <a href="TotalRevenueCustomer.jsp">Customer</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Best Sellers List</a>
+                            <a href="BestSellersList.jsp"><i class="fa fa-edit fa-fw"></i> Best Sellers List</a>
                         </li>
                     </ul>
                 </div>
